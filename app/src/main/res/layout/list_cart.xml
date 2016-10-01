@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dip"
+        android:elevation="4dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:id="@+id/imv_product"
+                    android:layout_width="100dip"
+                    android:layout_height="100dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="5dip"
+                    android:src="@drawable/glass" />
+
+                <TextView
+                    android:id="@+id/tv_itemname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dip"
+                    android:layout_toEndOf="@+id/imv_product"
+                    android:layout_toRightOf="@+id/imv_product"
+                    android:padding="4dip"
+                    android:text="Subrash - svdn"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tv_unitpriceview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_itemname"
+                    android:layout_alignStart="@+id/tv_itemname"
+                    android:layout_below="@+id/tv_itemname"
+                    android:padding="2dip"
+                    android:text="Unit Price :"
+                    android:textColor="@color/deep_gray" />
+
+                <TextView
+                    android:id="@+id/tv_unitprice"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/linearquant"
+                    android:layout_toRightOf="@+id/tv_unitpriceview"
+
+                    android:padding="2dip"
+                    android:text="$15" />
+
+                <LinearLayout
+                    android:id="@+id/linearquant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_unitpriceview"
+                    android:layout_toEndOf="@+id/imv_product"
+                    android:layout_toRightOf="@+id/imv_product"
+
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dip">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quantity"
+                        android:padding="2dip"
+                        android:textColor="@color/deep_gray"/>
+
+                  <ImageView
+                        android:id="@+id/imv_remove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                    android:visibility="gone"
+                        android:padding="0dip"
+                        android:src="@drawable/ic_remove_circle_24dp" />
+
+
+                    <TextView
+                        android:id="@+id/et_qty"
+                        android:layout_width="64dip"
+                        android:layout_height="wrap_content"
+                        android:padding="2dip"
+                        android:background="@null"
+                        android:gravity="left"
+                       android:textStyle="bold"
+                        android:textColor="@color/deep_blue"
+                        android:text="4" />
+
+                   <ImageView
+                        android:id="@+id/imv_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                       android:visibility="gone"
+                        android:padding="0dip"
+                        android:src="@drawable/ic_add_circle_24dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_totalview"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_unitpriceview"
+                    android:layout_alignStart="@+id/tv_unitpriceview"
+                    android:layout_below="@+id/linearquant"
+                    android:text="Total :"
+                    android:textColor="@color/deep_gray"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_totalunitprice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="8dip"
+                    android:text="$22.22"
+                    android:textColor="@color/deep_gray"
+                    android:layout_alignTop="@+id/tv_totalview"
+                    android:layout_toLeftOf="@+id/imv_more"
+                    android:layout_alignBottom="@+id/tv_totalview"
+                    android:layout_toRightOf="@+id/tv_totalview"
+                    android:layout_toEndOf="@+id/tv_totalview" />
+
+                <ImageView
+                    android:id="@+id/imv_deletecart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="2dip"
+                    android:padding="4dip"
+                    android:layout_marginRight="2dip"
+                    android:src="@drawable/ic_delete_24dp1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imv_more"
+                    android:src="@drawable/ic_more_24dp"
+                    android:padding="4dip"
+
+                    android:layout_alignBottom="@+id/imv_product"
+                    android:layout_alignRight="@+id/tv_itemname"
+                    android:layout_alignEnd="@+id/tv_itemname" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:orientation="vertical"
+                android:padding="4dip"
+                android:id="@+id/linear_headerdetails"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dip"
+                    android:weightSum="6">
+
+                    <TextView
+                        android:id="@+id/textView36"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/textView134"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="2dip"
+                        android:singleLine="true"
+                        android:text="@string/sphere"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView136"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="2dip"
+                        android:singleLine="true"
+                        android:text="@string/cylinder"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView137"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="2dip"
+                        android:text="@string/axis"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView138"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="2dip"
+                        android:text="@string/add"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView139"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="2dip"
+                        android:text="@string/pd"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <!-- <TextView
+                         android:layout_width="0dip"
+                         android:layout_weight="1"
+                         android:layout_height="wrap_content"
+                         android:text="@string/prism"
+                         android:padding="2dip"
+                         android:visibility="gone"
+                         android:textColor="@color/black"
+                         android:id="@+id/textView140" />-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dip"
+                    android:weightSum="6">
+
+                    <TextView
+                        android:id="@+id/textView141"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dip"
+                        android:text="@string/od"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_odsphr"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="0.2s-"
+                        android:textColor="@color/gray"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_odcyl"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_odaxis"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="-"
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_odadd"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_pd"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/gray" />
+
+                    <!-- <TextView
+                         android:layout_width="0dip"
+                         android:layout_weight="1"
+                         android:layout_height="wrap_content"
+                         android:text="@string/pd"
+                         android:gravity="center"
+                         android:visibility="gone"
+                         android:textColor="@color/gray"
+                         android:id="@+id/tv_odprism" />-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dip"
+                    android:weightSum="6">
+
+                    <TextView
+                        android:id="@+id/textView148"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dip"
+                        android:text="@string/os"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_ossphr"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textColor="@color/gray"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_oscyl"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="- "
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_osaxis"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="-"
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_osadd"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_ritpd"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textColor="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_osprism"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/pd"
+                        android:textColor="@color/gray"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout23"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="6dip"
+                    android:layout_weight="1.1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView155"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:padding="4dip"
+                        android:text="@string/prestype"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView156"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:padding="4dip"
+                        android:text="@string/lens"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView157"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dip"
+                        android:singleLine="true"
+                        android:text="@string/antireflectivecode"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView158"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dip"
+                        android:text="@string/tinting"
+                        android:textColor="@color/gray"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_presctype"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dip"
+                        android:text=" N/A "
+                        android:gravity="left" />
+
+                    <TextView
+                        android:id="@+id/tv_lens"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:padding="4dip"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text=" N/A "
+                        android:gravity="left" />
+
+                    <TextView
+                        android:id="@+id/tv_antirefl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:padding="4dip"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text=" N/A "
+                        android:gravity="left" />
+
+                    <TextView
+                        android:id="@+id/tv_tintying"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dip"
+                        android:text="N/A"
+                        android:gravity="left" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

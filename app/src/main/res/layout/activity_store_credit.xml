@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.ts.mobilelab.goggles4u.StoreCreditActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Balance : "
+        android:id="@+id/textView86"
+        android:padding="3dip"
+        android:textColor="@color/black"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="2dip"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv_crntbalance"
+        android:padding="3dip"
+        android:layout_marginLeft="2dip"
+        android:textColor="@color/black"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView86"
+        android:layout_toRightOf="@+id/textView86"
+        android:layout_toEndOf="@+id/textView86" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Balance History"
+        android:textColor="@color/black"
+        android:id="@+id/textView90"
+        android:layout_below="@+id/textView86"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="4dip" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView_balace"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout13" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView90"
+        android:layout_alignParentLeft="true"
+        android:weightSum="4"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout13">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Action"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:padding="3dip"
+            android:background="@color/light_gray"
+            android:id="@+id/textView88" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance charge"
+            android:textColor="@color/black"
+            android:padding="3dip"
+            android:background="@color/light_gray"
+            android:layout_weight="1"
+            android:id="@+id/textView91" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance Remain"
+            android:textColor="@color/black"
+            android:padding="3dip"
+            android:background="@color/light_gray"
+            android:layout_weight="1"
+            android:id="@+id/textView92" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textColor="@color/black"
+            android:padding="3dip"
+            android:background="@color/light_gray"
+            android:layout_weight="1"
+            android:id="@+id/textView93" />
+    </LinearLayout>
+</RelativeLayout>

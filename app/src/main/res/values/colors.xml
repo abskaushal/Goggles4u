@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f45506</color>
+    <color name="maincolor">#f45506</color>
+    <color name="colorPrimaryDark">#d24804</color>
+    <color name="colorAccent">#078c05</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_gray">#bdbdbd</color>
+    <!-- <color name="deep_gray">#9e9e9e</color>
+-->
+    <color name="light_blue">#5BE9FE</color>
+    <color name="deep_blue">#0394F9</color>
+    <color name="list_color_blue">#78BDFD</color>
+    <color name="gray">#6E8494</color>
+    <color name="deep_gray">#424f58</color>
+    <color name="btn_end">#5C5E60</color>
+    <color name="btn_start">#E6EBEF</color>
+
+    <color name="marron_g4u">#aa121e</color>
+    <drawable name="red">#7f00</drawable>
+    <drawable name="blue">#770000ff</drawable>
+    <drawable name="green">#7700ff00</drawable>
+
+    <color name="yellow">#77ffff00</color>
+    <color name="gold">#ccac00</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="selectn">#0faae1</color>
+
+    <drawable name="screen_background_black">#ff000000</drawable>
+    <drawable name="translucent_background">#e0000000</drawable>
+    <drawable name="transparent_background">#00000000</drawable>
+    <color name="transparent_background_0">#00000000</color>
+
+
+    <color name="map_transparent">#88FFFFFF</color>
+
+    <color name="blue_transparent">#6781BEF7</color>
+    <color name="gray_transparent">#EE000000</color>
+    <color name="white_transparent">#22FFFFFF</color>
+    <color name="visual_transparent">#55787878</color>
+    <color name="title_transparent">#99FF4444</color>
+    <color name="light_gray_transparent">#cc676767</color>
+    <color name="gray1">#d6d6d6</color>
+    <color name="gray2">#e0e0e0</color>
+
+    <drawable name="blue_transparent_background">#ee81BEF7</drawable>
+    <drawable name="green_transparent_background">#FF99CC00</drawable>
+
+    <color name="list_text_color">#405372</color>
+    <color name="list_divider">#9B5B5B</color>
+    <color name="solid_red">#f00</color>
+    <color name="solid_blue">#0000ff</color>
+    <color name="solid_green">#f0f0</color>
+    <color name="solid_yellow">#ffffff00</color>
+    <color name="blue_list_divider">#69ABEA</color>
+    <color name="lightgray">#ccc</color>
+    <color name="black">#000000</color>
+    <color name="darkgray">#444</color>
+    <color name="player_name">#6386BD</color>
+    <color name="page_body">#EAFFFF</color>
+    <color name="maroon">#810541</color>
+    <color name="light_maroon">#401111</color>
+    <color name="score_blue">#3BB9FF</color>
+    <color name="blue_color">#81BEF7</color>
+    <color name="screen_color">#909090</color>
+    <color name="macd_red">#CC0001</color>
+    <color name="text_black">#000000</color>
+    <color name="active_green">#089F19</color>
+    <color name="login_blue">#00BFFF</color>
+    <color name="light_bg1">#D9ECFA</color>
+    <color name="orange_trans">#66F0AD0B</color>
+    <color name="btncolor">#90676767</color>
+    <color name="spinner_base_color">#44000000</color>
+
+    <color name="black_overlay">#66000000</color>
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:padding="4dip"
+    tools:context="com.ts.mobilelab.goggles4u.PrescriprionListActivity">
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_prescrpt"
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/headerlt" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:visibility="gone"
+        android:id="@+id/tv_emptyview"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Add Prescription"
+        android:id="@+id/textView62"
+        android:background="@drawable/btnbgmaterial"
+        android:padding="7dip"
+        android:layout_marginTop="2dip"
+       android:layout_alignParentTop="true"
+        />
+<!--<HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_below="@+id/textView62"
+    android:id="@+id/scrollView"
+    android:layout_height="wrap_content">-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:weightSum="5"
+        android:layout_below="@+id/textView62"
+        android:id="@+id/headerlt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dip">
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/presname"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView2" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:id="@+id/textView55"
+            />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/created"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView60" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/actions"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView61" />
+    </LinearLayout>
+
+</RelativeLayout>

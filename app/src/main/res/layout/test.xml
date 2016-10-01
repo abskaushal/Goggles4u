@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/linear_fst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="2dip"
+
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Picture"
+                android:padding="5dip"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/tv_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Frame"
+                android:padding="5dip"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+       <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="bottom"
+            android:layout_toLeftOf="@+id/imv_select"
+            android:layout_toStartOf="@+id/imv_select">
+
+            <ImageView
+                android:id="@+id/imv_smallm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/male_small" />
+
+            <ImageView
+                android:id="@+id/imv_smallf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fe_small" />
+
+            <ImageView
+                android:id="@+id/imv_test"
+                android:layout_width="wrap_content"
+                android:layout_height="62dp"
+                android:src="@drawable/qq" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_rotate"
+            android:layout_below="@+id/linear_fst"
+            android:layout_margin="4dp" >
+
+
+            <RelativeLayout
+                android:id="@+id/linear_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="6dip"
+                android:layout_marginRight="6dip" >
+
+                <ImageView
+                    android:id="@+id/imv_scale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_addfriend_circle_red_72" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/linear_move"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imv_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/glass" />
+
+            </RelativeLayout>
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/imv_select"
+            android:layout_width="wrap_content"
+            android:layout_height="64dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="4dip"
+            android:src="@drawable/ic_addfriend_circle_red_72" />
+
+        <SeekBar
+            android:id="@+id/seekBar_scales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linear1"
+            android:layout_alignLeft="@+id/seekBar_rotate"
+            android:layout_margin="5dip" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seekBar_scale"
+            android:layout_alignParentLeft="true"
+            android:text="Scale"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <SeekBar
+            android:id="@+id/seekBar_rotate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView4"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dip" />
+
+        <TextView
+            android:id="@+id/tv_rotate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seekBar_rotate"
+            android:layout_alignParentLeft="true"
+            android:text="Rotate"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </RelativeLayout>

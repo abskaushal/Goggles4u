@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    >
+
+    <ImageView
+        android:layout_width="144dip"
+        android:layout_height="114dip"
+        android:id="@+id/imv_productgrid"
+
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dip"
+        android:layout_marginTop="4dip"
+        android:id="@+id/linear_colrlt"
+        android:layout_gravity="center_horizontal">
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:layout_marginTop="4dip"
+        android:id="@+id/tv_productid"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_gravity="center_horizontal" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:layout_marginTop="4dip"
+        android:id="@+id/tv_productprice"
+        android:layout_gravity="center_horizontal" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar_grid"
+        android:layout_marginTop="2dip"
+        style="@android:style/Widget.Holo.RatingBar.Small"
+        android:numStars="5"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4"
+        android:layout_marginTop="2dip"
+        android:padding="4dip"
+        android:minHeight="30dip"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:text="Try On"
+            android:layout_weight="2"
+            android:layout_marginRight="1dip"
+            android:textColor="@color/maincolor"
+            android:textSize="14sp"
+            android:background="@color/btn_start"
+            android:id="@+id/btn_tryon_grid" />
+
+        <ImageView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:id="@+id/imv_addtofav"
+            android:src="@drawable/ic_favorite_outline_24dp"
+            android:padding="4dip"
+            android:layout_weight="2"
+            android:background="@color/btn_start"
+            android:layout_alignParentRight="true" />
+
+      <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="Select"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+           android:layout_marginLeft="1dip"
+            android:minHeight="36dip"
+            android:textSize="14sp"
+            android:background="#aa121e"
+          android:visibility="gone"
+            android:id="@+id/btn_select_grid" />
+    </LinearLayout>
+</LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imv_addtofava"
+            android:src="@drawable/ic_favorite_outline_24dp"
+            android:layout_marginRight="16dip"
+            android:padding="4dip"
+            android:visibility="gone"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

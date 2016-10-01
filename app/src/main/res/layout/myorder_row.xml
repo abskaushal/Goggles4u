@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingLeft="4dip"
+android:layout_marginTop="2dip"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Id:"
+        android:id="@+id/tv_orderview"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/darkgray"
+        android:textSize="16sp"
+        android:padding="4dip"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#1222"
+        android:id="@+id/tv_myorderid"
+        android:padding="4dip"
+        android:layout_marginLeft="4dip"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tv_orderview"
+        android:layout_toEndOf="@+id/tv_orderview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv_dateview"
+        android:padding="4dip"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:gravity="right"
+        android:layout_alignTop="@+id/tv_myorderid"
+        android:layout_alignRight="@+id/tv_shiptoview"
+        android:layout_alignEnd="@+id/tv_shiptoview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ship To:"
+        android:id="@+id/tv_shipto"
+        android:textColor="@color/darkgray"
+        android:textSize="16sp"
+        android:padding="4dip"
+        android:layout_below="@+id/tv_orderview"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:padding="3dip"
+        android:layout_marginLeft="4dip"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:id="@+id/tv_shiptoview"
+        android:layout_below="@+id/tv_dateview"
+        android:layout_toRightOf="@+id/tv_orderview"
+        android:layout_toEndOf="@+id/tv_orderview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status:"
+        android:id="@+id/tv_status"
+        android:textColor="@color/darkgray"
+        android:textSize="16sp"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_shipto"
+        android:layout_toLeftOf="@+id/tv_shiptoview"
+        android:layout_toStartOf="@+id/tv_shiptoview" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv_statusview"
+        android:padding="3dip"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:layout_below="@+id/tv_shiptoview"
+        android:layout_alignLeft="@+id/tv_shiptoview"
+        android:layout_alignStart="@+id/tv_shiptoview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total:"
+        android:id="@+id/tv_total"
+        android:textColor="@color/darkgray"
+        android:textSize="16sp"
+        android:padding="3dip"
+        android:layout_below="@+id/tv_status"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tv_shipto"
+        android:layout_alignEnd="@+id/tv_shipto" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv_totlview"
+        android:padding="3dip"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:layout_alignTop="@+id/tv_total"
+        android:layout_alignLeft="@+id/tv_statusview"
+        android:layout_alignStart="@+id/tv_statusview" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View"
+        android:id="@+id/btn_view"
+        android:background="@color/active_green"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:layout_alignBottom="@+id/tv_totlview"
+        android:layout_alignRight="@+id/tv_statusview"
+        android:layout_alignEnd="@+id/tv_statusview" />
+</RelativeLayout>

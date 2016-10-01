@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relative_homepres"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".PrescriptionAddActivity"
+    tools:showIn="@layout/activity_prescription">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pres_scroll"
+        android:layout_above="@+id/linearLayout9">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dip"
+        android:layout_centerHorizontal="true"
+
+        android:id="@+id/linearLayout8">
+
+
+
+     <android.support.design.widget.TextInputLayout
+            android:layout_width="0dip"
+
+            android:layout_height="1dip">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_margin="4dip"
+            android:hint="@string/prescriptname"
+            android:padding="5dip"
+            android:visibility="visible"
+            android:id="@+id/et_scname"
+
+
+            android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_margin="4dip"
+                android:hint="@string/prescriptname"
+                android:padding="5dip"
+                android:visibility="gone"
+                android:id="@+id/et_edtprescname"
+
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <EditText
+            android:layout_width="0dip"
+            android:id="@+id/et_edtprdfsescname"
+            android:layout_height="0dip" />
+        <com.weiwangcn.betterspinner.library.BetterSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Prescription"
+            android:gravity="left"
+            android:textSize="18sp"
+            android:visibility="visible"
+            android:id="@+id/spinner_selctpresc"
+            android:layout_margin="5dip"
+            android:padding="6dip" />
+        <RelativeLayout
+            android:id="@+id/relative_prestype"
+
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dip"
+
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtpres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="PRESCRIPTION TYPE"
+
+                android:textColor="@color/gray"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view121"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="7dip"
+                android:layout_marginTop="4dip"
+                android:layout_toLeftOf="@+id/txtpres"
+                android:background="@color/light_gray" />
+
+            <View
+                android:id="@+id/view221"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="7dip"
+
+                android:layout_toRightOf="@+id/txtpres"
+                android:background="@color/light_gray" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Prescription Type"
+                android:gravity="left"
+                android:textSize="18sp"
+                android:focusable="false"
+                android:id="@+id/spinner_prescr"
+                android:layout_margin="5dip"
+                android:padding="6dip" />
+
+        </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative2"
+
+        android:layout_width="match_parent"
+        android:layout_marginTop="4dip"
+
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtsa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="OD and OS"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view11"
+            android:layout_width="wrap_content"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="7dip"
+            android:layout_marginTop="4dip"
+            android:layout_toLeftOf="@+id/txtsa"
+            android:background="@color/light_gray" />
+
+        <View
+            android:id="@+id/view21"
+            android:layout_width="wrap_content"
+            android:layout_height="1dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="7dip"
+
+            android:layout_toRightOf="@+id/txtsa"
+            android:background="@color/light_gray" />
+    </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dip"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray"
+                android:id="@+id/textView6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right-OD"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray"
+                android:layout_weight="1"
+                android:id="@+id/textView7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Left-OS"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:id="@+id/textView24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+
+            android:layout_marginTop="4dip"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="Sphere"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textSize="16sp"
+            android:paddingLeft="4dip"
+            android:textColor="@color/darkgray"
+            android:id="@+id/textView25" />
+        <com.weiwangcn.betterspinner.library.BetterSpinner
+            android:id="@+id/spinner_sphererod"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative1"
+            android:layout_marginBottom="2dip"
+            android:layout_margin="4dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/gray"
+            android:hint="Select " />
+
+        <com.weiwangcn.betterspinner.library.BetterSpinner
+            android:id="@+id/spinner_spherelos"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative1"
+            android:layout_marginBottom="2dip"
+            android:layout_margin="4dip"
+
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/gray"
+            android:hint="Select" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+
+            android:layout_marginTop="4dip"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Cylinder"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:textSize="16sp"
+                android:paddingLeft="4dip"
+                android:textColor="@color/darkgray"
+                android:id="@+id/textView26" />
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_cylinderod"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:hint="Select " />
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_cylinderos"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:hint="Select" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:paddingLeft="4dip"
+            android:layout_marginTop="4dip"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Axis"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/darkgray"
+                android:id="@+id/textView27" />
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_axisod"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:hint="Select " />
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_axisos"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:hint="Select" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:layout_marginTop="4dip"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:paddingLeft="4dip"
+                android:textColor="@color/darkgray"
+                android:id="@+id/textView28" />
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_addod"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:hint="Select " />
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_addos"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:hint="Select" />
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/relative3"
+
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dip"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_pd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="PD"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view03"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="7dip"
+                android:layout_marginTop="4dip"
+                android:layout_toLeftOf="@+id/txt_pd"
+                android:background="@color/light_gray" />
+
+            <View
+                android:id="@+id/view31"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="7dip"
+
+                android:layout_toRightOf="@+id/txt_pd"
+                android:background="@color/light_gray" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:id="@+id/linearLayout_pdss"
+
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:id="@+id/rg_pd"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Single PD"
+                android:id="@+id/rbtn_singlepd"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:padding="5dip"
+                android:gravity="center"
+                android:layout_margin="10dip"
+                />
+
+            <RadioButton
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Dual PD"
+                android:id="@+id/rbtn_dblpd"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:padding="5dip"
+                android:layout_margin="10dip"
+                />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_horizontal">
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_singlepd"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:hint="Select " />
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_doblepdl"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:hint="Select Left PD" />
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_doblepdr"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:hint="SelectRight PD " />
+        </LinearLayout>
+       <RelativeLayout
+            android:id="@+id/relative4"
+
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dip"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_prismval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Prism Values"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view04"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="7dip"
+                android:layout_marginTop="4dip"
+                android:layout_toLeftOf="@+id/txt_prismval"
+                android:background="@color/light_gray" />
+
+            <View
+                android:id="@+id/view32"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="7dip"
+
+                android:layout_toRightOf="@+id/txt_prismval"
+                android:background="@color/light_gray" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:id="@+id/linearLayout_prismval"
+
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:id="@+id/rg_prism"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+            <RadioButton
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:id="@+id/rbtn_prismyes"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:padding="5dip"
+                android:gravity="center"
+                android:layout_margin="10dip"
+                />
+
+            <RadioButton
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:id="@+id/rbtn_prismno"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:padding="5dip"
+                android:checked="true"
+                android:layout_margin="10dip"
+                />
+            </RadioGroup>
+        </LinearLayout>
+       <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:id="@+id/linear_prism"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+          >
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+
+            android:layout_gravity="center_horizontal" >
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Type"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray"
+                android:id="@+id/textView31" />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="@string/prismval"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray"
+                android:layout_weight="1"
+                android:id="@+id/textView32" />
+
+
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="@string/direction"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:id="@+id/textView33" />
+        </LinearLayout>
+
+      <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+
+            android:layout_marginTop="4dip"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="OD-right"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/darkgray"
+                android:id="@+id/text_odrit" />
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_prismr"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:hint="Select " />
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_baserdir"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:hint="Select" />
+        </LinearLayout>
+     <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+
+            android:layout_marginTop="4dip"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="OS-Left"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/darkgray"
+                android:id="@+id/textView262" />
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_prisosl"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:gravity="center"
+                android:hint="Select " />
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/spinner_prisosbaseldir"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relative1"
+                android:layout_marginBottom="2dip"
+                android:layout_margin="4dip"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:hint="Select" />
+        </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="3"
+
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout9">
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:visibility="visible"
+
+            android:background="@color/active_green"
+            android:id="@+id/btn_cancelpres" />
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/btn_nextpres"
+            android:textColor="@color/white"
+            android:layout_weight="2"
+            android:text="@string/save"
+            android:background="@color/active_green"
+            android:layout_marginLeft="1dip" />
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

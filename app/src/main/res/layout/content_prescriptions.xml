@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:padding="4dip"
+    android:background="@color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ts.mobilelab.goggles4u.PrescriptionsActivity"
+    tools:showIn="@layout/activity_prescriptions">
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_prescrpt"
+
+        android:layout_marginTop="40dip"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_addpresc" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="4dip"
+        android:gravity="center"
+        android:id="@+id/empty"
+        android:text="No Prescription avilable"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tv_emptyview"
+        android:layout_toEndOf="@+id/tv_emptyview" />
+   <!-- <ViewStub
+        android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout="@layout/empty" />-->
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:visibility="gone"
+        android:id="@+id/tv_emptyview"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Add Prescription"
+        android:id="@+id/btn_addpresc"
+        android:padding="8dip"
+        android:visibility="visible"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="2dip"
+        android:background="@drawable/btnbgmaterial"
+        android:textColor="@color/white"
+        android:layout_alignParentTop="true"
+        />
+    <!--<HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/textView62"
+        android:id="@+id/scrollView"
+        android:layout_height="wrap_content">-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5"
+        android:id="@+id/headerlt"
+        android:visibility="visible"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_addpresc">
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/presname"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="@color/darkgray"
+            android:id="@+id/textView2" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textStyle="bold"
+            android:textColor="@color/darkgray"
+            android:layout_weight="1"
+            android:id="@+id/textView55"
+            />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/created"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/darkgray"
+            android:id="@+id/textView60" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="@string/actions"
+            android:layout_weight="2"
+            android:textStyle="bold"
+            android:textColor="@color/darkgray"
+            android:gravity="center"
+            android:id="@+id/textView61" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dip"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ts.mobilelab.goggles4u.RegistrationActivity"
+    tools:showIn="@layout/activity_registration">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_register"
+        android:id="@+id/btn_create"
+        android:background="@color/active_green"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btn_create" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_fstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="14dip"
+                    android:textColorHint="@color/light_gray"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="7dip"
+                    android:hint="@string/fstname"
+
+
+                    />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/emiddlename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="14dip"
+                    android:textColorHint="@color/light_gray"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="7dip"
+                    android:visibility="gone"
+
+                    android:hint="@string/middlename"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:padding="14dip"
+                    android:textColorHint="@color/light_gray"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="7dip"
+                    android:hint="@string/lstname"
+
+                    android:id="@+id/edt_lstname"
+                    android:layout_alignTop="@+id/scrollView3"
+                    android:layout_centerHorizontal="true"
+                    />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:padding="14dip"
+                    android:textColorHint="@color/light_gray"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="7dip"
+                    android:hint="@string/prompt_email"
+
+                    android:id="@+id/edt_email"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:padding="14dip"
+
+                    android:textColorHint="@color/light_gray"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="7dip"
+                    android:hint="@string/prompt_password"
+                    android:id="@+id/edt_pswd"
+
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:padding="14dip"
+
+                    android:textColorHint="@color/light_gray"
+                    android:textColor="@color/gray"
+                    android:layout_marginTop="7dip"
+                    android:hint="@string/cnfpwd"
+                    android:id="@+id/edt_cnfpswd"
+
+                    android:layout_centerHorizontal="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

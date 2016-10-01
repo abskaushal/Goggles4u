@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ts.mobilelab.goggles4u.Payment"
+    tools:showIn="@layout/activity_payment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="4dip"
+        android:layout_centerHorizontal="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/labllt"
+            android:layout_margin="5dip">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/tv_waletmsg"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="4dip"
+                android:padding="4dip"
+                android:gravity="center"
+                android:textColor="@color/maincolor"
+                android:layout_toLeftOf="@+id/cb_storecredit"
+                android:layout_toStartOf="@+id/cb_storecredit" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dip"
+                android:id="@+id/cb_storecredit"
+                android:layout_gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rg_pay"
+            android:layout_marginTop="20dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="5dip"></RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Total to Pay"
+            android:gravity="center"
+            android:textColor="@color/deep_blue"
+            android:textStyle="bold"
+            android:id="@+id/tv_totalpay" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/btn_paysubmit"
+            android:background="@drawable/btnbgmaterial"
+            android:layout_marginTop="20dip"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dip"
+            android:layout_marginRight="16dip" />
+    </LinearLayout>
+</RelativeLayout>

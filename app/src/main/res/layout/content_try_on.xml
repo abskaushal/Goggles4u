@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:padding="2dip"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ts.mobilelab.goggles4u.TryOnActivity"
+    tools:showIn="@layout/activity_try_on">
+    <LinearLayout
+        android:id="@+id/linear_fst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dip"
+
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Picture"
+            android:padding="8dip"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Frame"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
+            android:padding="8dip"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@+id/linear_scale"
+        android:layout_toLeftOf="@+id/imv_addimg"
+        android:layout_toStartOf="@+id/imv_addimg">
+
+        <ImageView
+            android:id="@+id/imv_smallm"
+            android:layout_width="64dip"
+            android:layout_height="64dip"
+            android:layout_margin="2dip"
+            android:src="@drawable/male_small" />
+
+        <ImageView
+            android:id="@+id/imv_smallf"
+            android:layout_width="64dip"
+            android:layout_height="64dip"
+            android:layout_margin="2dip"
+            android:src="@drawable/fe_small" />
+
+        <ImageView
+            android:id="@+id/imv_test"
+            android:layout_width="64dip"
+            android:layout_height="64dip"
+            android:layout_margin="2dip"
+            android:contentDescription="@string/description" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+      android:weightSum="4"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear_rotate"
+        android:id="@+id/linear_scale">
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Scale"
+        android:padding="4dip"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/white"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/tv_scale" />
+
+    <SeekBar
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar_scale"
+        android:layout_weight="3"
+        android:focusable="false"
+        android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:weightSum="4"
+        android:layout_marginTop="4dip"
+        android:layout_alignParentBottom="true"
+
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_rotate">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Rotate"
+            android:padding="4dip"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@+id/tv_rotate" />
+
+        <SeekBar
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar_rotate"
+            android:layout_weight="3"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imv_addimg"
+        android:src="@mipmap/ic_slctimg"
+        android:padding="2dip"
+        android:minHeight="40dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/linear_scale" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scale and pinch to adjust the image"
+        android:textColor="@color/deep_blue"
+        android:id="@+id/tv_scalemsg"
+        android:gravity="center"
+        android:padding="4dip"
+        android:layout_below="@+id/linear_fst"
+        android:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear1"
+        android:layout_below="@+id/tv_scalemsg"
+        android:layout_margin="4dp" >
+
+
+        <RelativeLayout
+            android:id="@+id/linear_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6dip"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dip" >
+   <!--<ImageView
+                android:id="@+id/imv_scale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dip"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+              android:foregroundGravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/male_big" >
+
+    </ImageView>-->
+           <com.ts.mobilelab.goggles4u.views.utils.ScaleImageView
+                android:id="@+id/imv_scale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dip"
+                android:layout_centerVertical="true"
+                android:foregroundGravity="center"
+                android:scaleType="matrix"
+                android:src="@drawable/male_big"/>
+
+            <RelativeLayout
+                android:id="@+id/linear_move"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:orientation="vertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <ImageView
+                    android:id="@+id/imv_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/glass"
+                    android:scaleType="centerInside"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:layout_marginLeft="16dip"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="36dip"
+                    android:layout_height="100dip"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/linear_framsize"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dip"
+                        android:src="@drawable/ic_add_circle_24dp"
+                        android:id="@+id/imv_addf" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dip"
+                        android:layout_marginTop="28dip"
+                        android:src="@drawable/ic_remove_circle_24dp"
+                        android:id="@+id/imv_subf" />
+                </LinearLayout>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBar_tryon"
+                    android:layout_alignTop="@+id/linear_framsize"
+                    android:layout_centerHorizontal="true" />
+
+          <!--  </RelativeLayout>-->
+            <!--<com.ts.mobilelab.goggles4u.views.utils.TouchImageView
+                           android:id="@+id/imv_scale"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_centerHorizontal="true"
+                           android:layout_marginTop="20dip"
+                           android:layout_centerVertical="true"
+                           android:foregroundGravity="center"
+                            android:scaleType="center"
+                           android:src="@drawable/male_big" />-->
+         <!--<com.ts.mobilelab.goggles4u.views.utils.ScaleImageView
+                android:id="@+id/imv_scale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dip"
+                android:layout_centerVertical="true"
+                android:foregroundGravity="center"
+                android:scaleType="matrix"
+                android:src="@drawable/male_big"/>-->
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <!--<ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView5"
+        android:layout_margin="5dip"
+        android:src="@drawable/qq"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linear_fst"
+        android:layout_above="@+id/linear1" />-->
+</RelativeLayout>

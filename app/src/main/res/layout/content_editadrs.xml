@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".EditAddress"
+    tools:showIn="@layout/activity_check_out">
+    <!--<Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:id="@+id/btn_addadrs"
+        android:background="@color/active_green"
+        android:textColor="@color/white"
+        android:text="Add new address"
+        android:layout_alignParentTop="true"
+        android:layout_margin="4dip" />-->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:layout_above="@+id/btn_continue"
+    android:layout_marginTop="4dip">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:padding="8dip"
+        android:layout_centerHorizontal="true">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="@dimen/textsize"
+            android:textColor="@color/gray"
+            android:hint="@string/fstname"
+            android:id="@+id/edt_fname"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/lstname"
+            android:id="@+id/edt_lname"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textsize"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="@string/prompt_email"
+                android:id="@+id/edt_email"
+                android:visibility="gone"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/textsize"
+                android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textsize"
+            android:hint="@string/company"
+            android:id="@+id/edt_company"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt_address"
+            android:hint="@string/addrs"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textsize"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt_adrs2"
+            android:hint="@string/addrs2"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textsize"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt_city"
+            android:hint="@string/city"
+            android:textSize="@dimen/textsize"
+            android:textColor="@color/gray"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/zipcode"
+            android:textSize="@dimen/textsize"
+
+            android:id="@+id/edt_postcode"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+
+        <com.weiwangcn.betterspinner.library.BetterSpinner
+            android:id="@+id/spinner_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dip"
+            android:textSize="@dimen/textsize"
+            android:textColor="@color/gray"
+
+            android:hint="@string/slctcountry" />
+        <com.weiwangcn.betterspinner.library.BetterSpinner
+            android:id="@+id/spinner_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:textColor="@color/gray"
+            android:gravity="left"
+            android:padding="8dip"
+            android:hint="@string/slctstate" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="@string/state"
+                android:textSize="@dimen/textsize"
+                android:visibility="gone"
+                android:id="@+id/edt_state"
+                android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt_telephone"
+            android:hint="@string/teephone"
+            android:inputType="number"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textsize"
+            android:maxLength="10"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/fax"
+            android:id="@+id/edt_fax"
+            android:textSize="@dimen/textsize"
+            android:textColor="@color/gray"
+            android:layout_gravity="center_horizontal" />
+        </android.support.design.widget.TextInputLayout>
+<RadioGroup
+    android:layout_width="match_parent"
+    android:visibility="gone"
+    android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shipthisads"
+            android:id="@+id/radioButton_shipthis"
+            android:padding="5dip"
+            android:checked="true"
+            android:layout_gravity="center_horizontal" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shipdiffads"
+            android:id="@+id/radioButton_shipdiff"
+            android:padding="5dip"
+            android:layout_gravity="center_horizontal" />
+</RadioGroup>
+        <LinearLayout
+            android:id="@+id/linear_defultship"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_emailid"
+            android:layout_marginTop="2dip"
+            android:visibility="visible"
+            android:orientation="horizontal"
+            android:padding="2dip">
+
+            <Switch
+                android:id="@+id/switch_shipngadrs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dip" />
+
+
+
+            <TextView
+                android:id="@+id/textView111"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dip"
+                android:textColor="@color/darkgray"
+                android:text="Default Shipping" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_defultbill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:orientation="horizontal"
+            android:padding="2dip"
+            android:layout_alignTop="@+id/switch_bilngadrs"
+            android:layout_centerHorizontal="true">
+
+            <Switch
+                android:id="@+id/switch_bilngadrs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dip" />
+
+            <TextView
+                android:id="@+id/textView135"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dip"
+                android:textColor="@color/darkgray"
+                android:text="Default Billing" />
+        </LinearLayout>
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save in address book"
+            android:visibility="gone"
+            android:id="@+id/chkbox_saveadrs" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shipping Info"
+            android:id="@+id/btn_shipingdata"
+            android:background="@color/active_green"
+            android:textColor="@color/white"
+            android:visibility="gone"
+           />
+    </LinearLayout>
+</ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:id="@+id/btn_continue"
+        android:background="@color/active_green"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+</RelativeLayout>

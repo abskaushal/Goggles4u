@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <group android:checkableBehavior="single"
+        >
+
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_24dp"
+
+            android:title="Home" />
+        <!--<ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="200dip"
+            android:choiceMode="singleChoice"
+            android:layout_gravity="left"
+            android:id="@+id/lvexp_category"></ExpandableListView>-->
+        <item
+            android:id="@+id/nav_my_account"
+            android:icon="@drawable/ic_person_24dp"
+            android:title="My Account" />
+        <item
+            android:id="@+id/nav_my_cart"
+            android:icon="@drawable/ic_shopping_cart_24dp"
+            android:visible="false"
+            android:title="My Cart" />
+        <item
+            android:id="@+id/nav_checkout"
+            android:icon="@drawable/ic_shopping_basket_24dp"
+            android:visible="false"
+            android:title="Checkout" />
+        <item
+            android:id="@+id/nav_myorder"
+            android:icon="@drawable/ic_my_library_books_24dp"
+            android:title="My Orders"></item>
+
+         <item
+               android:id="@+id/nav_rateus"
+               android:icon="@drawable/ic_star_half_24dp"
+                android:visible="true"
+               android:title="Rate Us" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_person_24dp"
+            android:visible="false"
+            android:title="Login" />
+    </group>
+
+    <!-- <item android:title="Communicate">
+         <menu>
+             <item
+                 android:id="@+id/nav_share"
+                 android:icon="@drawable/ic_menu_share"
+                 android:title="Share" />
+             <item
+                 android:id="@+id/nav_send"
+                 android:icon="@drawable/ic_menu_send"
+                 android:title="Send" />
+         </menu>
+     </item>-->
+
+</menu>

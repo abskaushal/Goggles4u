@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".PrescriptionViewActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Prescription Name : "
+        android:id="@+id/textView63"
+        android:padding="4dip"
+        android:textColor="@color/black"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="4dip" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="test name"
+        android:id="@+id/tv_presnameview"
+        android:padding="4dip"
+        android:textColor="@color/black"
+        android:layout_alignBottom="@+id/textView63"
+        android:layout_toRightOf="@+id/textView63"
+        android:layout_toEndOf="@+id/textView63"
+        android:layout_marginLeft="4dip" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Prescription Type : "
+        android:padding="4dip"
+        android:textColor="@color/black"
+        android:id="@+id/textView65"
+        android:layout_below="@+id/textView63"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dip" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="bofocus"
+        android:id="@+id/tv_presc_typeview"
+        android:layout_alignTop="@+id/textView65"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:padding="4dip"
+        android:textColor="@color/black"
+        android:layout_toEndOf="@+id/textView65"
+        android:layout_above="@+id/linearLayout10"
+        android:layout_alignLeft="@+id/tv_presnameview"
+        android:layout_alignStart="@+id/tv_presnameview" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView65"
+        android:weightSum="3"
+        android:background="@drawable/bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dip"
+        android:id="@+id/linearLayout10">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                android:padding="4dip"
+                android:textStyle="bold"
+                android:id="@+id/textView64" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/sphere"
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:id="@+id/textView66" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/cylinder"
+                android:textStyle="bold"
+
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:id="@+id/textView75" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/pd"
+                android:padding="4dip"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:id="@+id/textView76" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="OD"
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:id="@+id/textView67" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" -"
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tv_sphrod" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" -"
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tv_cyliod" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - "
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tv_pdod" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="OS"
+
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:id="@+id/textView69" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - "
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tv_sphros" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - "
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tv_cylios" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - "
+                android:padding="4dip"
+                android:textColor="@color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tv_pdos" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

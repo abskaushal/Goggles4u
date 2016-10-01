@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ts.mobilelab.goggles4u.PrescriptionNextActivity"
+    tools:showIn="@layout/activity_prescription_next">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Price:"
+        android:padding="4dip"
+        android:layout_marginLeft="84dip"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/maincolor"
+        android:id="@+id/tv_pricev"
+         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="$444"
+        android:id="@+id/tv_totalprice"
+        android:padding="4dip"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/deep_blue"
+        android:layout_marginLeft="4dip"
+        android:layout_above="@+id/scrollView"
+        android:layout_toRightOf="@+id/tv_pricev"
+        android:layout_toEndOf="@+id/tv_pricev" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:layout_alignParentTop="true"
+        android:layout_below="@+id/tv_pricev"
+        android:id="@+id/scrollView"
+        android:layout_above="@+id/btn_lt">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dip"
+       >
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/lenses"
+            android:layout_marginLeft="4dip"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/textView34" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_marginLeft="4dip"
+            android:id="@+id/rg_lensopt"
+            android:layout_height="wrap_content">
+            </RadioGroup>
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/relative_tinting"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dip"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_tint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/tinting"
+                android:textColor="@color/deep_gray"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view05"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="7dip"
+                android:layout_marginTop="4dip"
+                android:layout_toLeftOf="@+id/txt_tint"
+                android:background="@color/gray" />
+
+            <View
+                android:id="@+id/view33"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="7dip"
+
+                android:layout_toRightOf="@+id/txt_tint"
+                android:background="@color/gray" />
+
+        </RelativeLayout>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:id="@+id/rg_tint"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:minHeight="40dip"
+                android:id="@+id/rb_tintyes"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:padding="5dip"
+                android:gravity="center"
+                android:layout_margin="10dip"
+                />
+
+            <RadioButton
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:id="@+id/rb_tintno"
+                android:layout_weight="1"
+                android:minHeight="40dip"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:padding="5dip"
+
+                android:layout_margin="10dip"
+                />
+        </RadioGroup>
+
+     <EditText
+            android:layout_width="0dip"
+            android:layout_height="1dip"
+            />
+
+        <com.weiwangcn.betterspinner.library.BetterSpinner
+            android:id="@+id/spinner_tinting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="4dip"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:textSize="16sp"
+            android:textColor="@color/gray"
+            android:gravity="center"
+            android:hint="Select " />
+      <!--  <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:padding="8dip"
+            android:layout_gravity="center_horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dip"
+                android:text="No"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:textColor="@color/black"
+
+                android:gravity="center"
+
+                android:id="@+id/textView35" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dip"
+                android:text="Yes"
+                android:layout_weight="1"
+                android:background="@color/light_gray"
+                android:textColor="@color/white"
+                android:gravity="center"
+
+                android:id="@+id/textView36" />
+        </LinearLayout>-->
+        <RelativeLayout
+            android:id="@+id/relative_arc"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dip"
+
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_antiqting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/anticoating"
+                android:textColor="@color/deep_gray"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/view015"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="7dip"
+                android:layout_marginTop="4dip"
+                android:layout_toLeftOf="@+id/txt_antiqting"
+                android:background="@color/gray" />
+
+            <View
+                android:id="@+id/view34"
+                android:layout_width="wrap_content"
+                android:layout_height="1dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="7dip"
+
+                android:layout_toRightOf="@+id/txt_antiqting"
+                android:background="@color/gray" />
+
+        </RelativeLayout>
+        <EditText
+            android:layout_width="0dip"
+            android:layout_height="1dip"
+            />
+
+
+        <com.weiwangcn.betterspinner.library.BetterSpinner
+            android:id="@+id/spinner_coating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="4dip"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:textSize="16sp"
+            android:textColor="@color/gray"
+            android:gravity="center"
+            android:hint="Select " />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:weightSum="1"
+            android:visibility="gone"
+
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:text="@string/quantity"
+            android:textStyle="bold"
+            android:id="@+id/textView37"
+            android:gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginTop="5dip"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="0.2" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_quantity"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:hint="Enter quantity"
+                />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cbx_savepres"
+            android:layout_marginLeft="8dip"
+            android:layout_marginTop="4dip"
+            android:text="Save this prescription in my account"/>
+    </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:id="@+id/btn_lt"
+        android:weightSum="3"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+       >
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="To pay"
+            android:layout_weight="1.2"
+            android:id="@+id/tv_amnttopay"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@color/active_green"
+            android:textColor="@color/white"
+
+            />
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:text="Add To Cart"
+            android:id="@+id/btn_addtocart"
+            android:textColor="@color/white"
+            android:layout_weight="1.8"
+
+            android:layout_gravity="center_horizontal"
+            android:background="@color/active_green"
+            android:layout_alignParentBottom="true"
+           />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

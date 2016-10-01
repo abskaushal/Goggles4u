@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="4dip"
+    android:layout_height="match_parent">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    app:cardElevation="2dip"
+    app:cardCornerRadius="4dip"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="84dip"
+            android:layout_height="84dip"
+            android:id="@+id/imv_framefav"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/tv_namefabv"
+            android:layout_marginTop="4dip"
+            android:layout_marginLeft="4dip"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imv_framefav"
+            android:layout_toEndOf="@+id/imv_framefav" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/tv_pricefav"
+            android:layout_marginTop="4dip"
+            android:layout_marginLeft="4dip"
+            android:layout_below="@+id/tv_namefabv"
+            android:layout_toRightOf="@+id/imv_framefav"
+            android:layout_toEndOf="@+id/imv_framefav" />
+
+        <ImageView
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:id="@+id/imv_dltfav"
+            android:padding="4dip"
+            android:layout_marginTop="4dip"
+            android:src="@drawable/ic_delete_24dp1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+</LinearLayout>

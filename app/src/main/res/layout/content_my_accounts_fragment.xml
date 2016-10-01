@@ -1,0 +1,483 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment"
+    android:name="com.ts.mobilelab.goggles4u.MyAccountsFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:layout="@layout/fragment_my_accounts_fragment" >
+    <ScrollView
+        android:id="@+id/scrollView5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_unameview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:padding="4dip"
+            android:text="Name :"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_uname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView73"
+            android:padding="4dip"
+            android:text="N/A"
+            android:textColor="@color/darkgray" />
+
+        <TextView
+            android:id="@+id/tv_uemailview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dip"
+            android:text="Email Address :"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_uemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dip"
+            android:padding="4dip"
+            android:text="N/A"
+            android:textColor="@color/darkgray" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_emailid"
+            android:layout_marginTop="2dip"
+            android:orientation="horizontal"
+            android:padding="2dip"
+            android:visibility="gone">
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dip" />
+
+            <TextView
+                android:id="@+id/textView111"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dip"
+                android:text="General Subscription" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linerlt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_subscription"
+            android:layout_marginTop="5dip"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_chngpswd"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:gravity="center"
+                android:padding="8dip"
+                android:text="Change Password"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_editinfo"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dip"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg"
+                android:gravity="center"
+                android:padding="8dip"
+                android:text="Edit Info."
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:textStyle="bold"
+
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view22"
+            android:layout_width="wrap_content"
+            android:layout_height="0dip"
+            android:layout_below="@+id/linerlt"
+            android:layout_marginTop="4dip"
+            android:background="@color/light_gray" />
+
+        <RelativeLayout
+            android:id="@+id/relative_adrs1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view22"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_biladrsview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:padding="4dip"
+                android:paddingLeft="4dip"
+                android:text="Billing Address:"
+
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/addaddresview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_24dp"
+                android:gravity="right|end"
+                android:padding="3dip"
+                android:text="Add Address"
+                android:textColor="@color/active_green"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dip"
+            android:elevation="4dip">
+
+            <RelativeLayout
+                android:id="@+id/relative_adrs2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/adresview"
+                    android:layout_width="match_parent"
+                    android:minHeight="42dip" android:gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="right"
+                    android:drawableRight="@drawable/ic_keyboard_arrow_right_24dp"
+                    android:padding="8dip"
+                    android:text="Add Address"
+                    android:textColor="@color/active_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+
+            android:id="@+id/cardview_biling"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout14"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:orientation="vertical"
+                android:padding="4dip">
+
+                <TextView
+                    android:id="@+id/tv_bilingaddrs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dip"
+                    android:text="New Text"
+                    android:textColor="@color/darkgray" />
+
+                <TextView
+                    android:id="@+id/tv_bilngadrs2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/linearLayout15"
+                    android:padding="2dip"
+                    android:text="Small Text"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/darkgray"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_bilngadrs3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dip"
+                    android:text="Small Text"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/darkgray" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView97"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dip"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tv_editadrsbil"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_bg"
+                        android:gravity="center"
+                        android:padding="8dip"
+                        android:text="Edit"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_dltadrsbil"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dip"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_bg"
+                        android:gravity="center"
+                        android:padding="8dip"
+                        android:text="Delete"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <!--   <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Click on Add Address to Add an Address."
+               android:textColor="@color/deep_blue"
+               android:layout_margin="5dip"
+               android:visibility="gone"
+               android:id="@+id/btn_addbiladrs" />-->
+
+        <TextView
+
+            android:id="@+id/tv_shipadrsview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout15"
+            android:layout_marginTop="4dip"
+            android:layout_weight="1"
+            android:padding="4dip"
+            android:paddingLeft="4dip"
+            android:text="Shipping Address:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview_shiping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dip"
+
+                >
+
+                <TextView
+                    android:id="@+id/tv_editshipaddrs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dip"
+                    android:text="New Text"
+                    android:textColor="@color/darkgray" />
+
+                <TextView
+                    android:id="@+id/tv_shipngadrs2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dip"
+                    android:text="Small Text"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/darkgray"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_shipngadrs3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dip"
+                    android:text="Small Text"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/darkgray" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView103"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dip"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tv_editshipngadrs"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_bg"
+                        android:gravity="center"
+                        android:padding="8dip"
+                        android:text="Edit"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_dltadrsshipng"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dip"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_bg"
+                        android:gravity="center"
+                        android:padding="8dip"
+                        android:text="Delete"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Click on Add Address to Add an Address."
+
+            android:textColor="@color/deep_blue"
+            android:id="@+id/btn_addshipadrs"
+            android:visibility="gone"
+            android:layout_margin="5dip" />-->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout18"
+            android:layout_margin="4dip"
+            android:elevation="4dip">
+
+            <TextView
+                android:id="@+id/tv_storecredit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="42dip" android:gravity="center_vertical"
+                android:layout_marginTop="4dip"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_24dp"
+                android:padding="8dip"
+
+                android:text="Store Credit"
+                android:textColor="@color/active_green"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dip"
+            android:elevation="4dip">
+
+            <TextView
+                android:id="@+id/tv_myorder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" android:minHeight="42dip" android:gravity="center_vertical"
+                android:layout_below="@+id/view2122"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_24dp"
+                android:padding="8dip"
+
+                android:text="My Order"
+                android:textColor="@color/active_green"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dip"
+            android:elevation="4dip">
+            <TextView
+                android:id="@+id/tv_prescriptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" android:minHeight="42dip" android:gravity="center_vertical"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/view2122"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_24dp"
+                android:padding="8dip"
+
+                android:text="Prescriptions"
+                android:textColor="@color/active_green"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    </ScrollView>
+    </fragment>

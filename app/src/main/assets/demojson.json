@@ -1,0 +1,51 @@
+{
+     "ErrorMessage":"Success",
+     "HasError":"False",
+     "Results": {
+     "PromoImages": ["http://www.goggles4u.com/media/em_slideshow/1453477200_2_HP-BOGO-2016.jpg","http://www.goggles4u.com/media/em_slideshow/1453477200_1_HP-Designers-2016.jpg","http://www.goggles4u.com/media/em_slideshow/1453477200_0_HP-2For10-2016.jpg"],
+     "PromoImages": ["http://www.goggles4u.com/media/em_slideshow/1453477200_2_HP-BOGO-2016.jpg","http://www.goggles4u.com/media/em_slideshow/1453477200_1_HP-Designers-2016.jpg","http://www.goggles4u.com/media/em_slideshow/1453477200_0_HP-2For10-2016.jpg"],
+     "NewArrivalProductList": [
+                               {
+                                  "ProductName": "G4U-111551",
+                                  "ProductImageurl": "http://www.goggles4u.com/media/catalog/product/cache/1/small_image/360x130/9df78eab33525d08d6e5fb8d27136e95/1/1/111551a.jpg",
+                                  "Price": "$15.95",
+                                  "ProductId": "G4UTR0001",
+                                  "Size": "L"
+                                },
+                               {"ProductName": "G4U TR7606",
+                                 "ProductImageurl": "http://www.goggles4u.com/media/catalog/product/cache/1/small_image/360x130/9df78eab33525d08d6e5fb8d27136e95/1/1/112426a.jpg",
+
+                                  "Price": "$19.95",
+                                  "ProductId": "G4UTR0002",
+                                  "Size": "L"
+                                },
+                              {"ProductName": "G4U TR7618",
+                                  "ProductImageurl": "http://www.goggles4u.com/media/catalog/product/cache/1/small_image/360x130/9df78eab33525d08d6e5fb8d27136e95/1/1/111760a_1.jpg",
+                                  "Price": "$15.95",
+                                  "ProductId": "G4UTR0003",
+                                  "Size": "L"
+                                },
+                              {"ProductName": "G4U G-9006",
+                                  "ProductImageurl": "http://www.goggles4u.com/media/catalog/product/cache/1/small_image/360x130/9df78eab33525d08d6e5fb8d27136e95/1/1/112065a.jpg",
+                                  "Price": "$12.95",
+                                  "ProductId": "G4UTR0004",
+                                  "Size": "M"
+                                },
+                              {
+                                  "ProductName": "ALBERT 8870",
+                                  "ProductImageurl": "http://www.goggles4u.com/media/catalog/product/cache/1/small_image/360x130/9df78eab33525d08d6e5fb8d27136e95/1/1/112401a_1.jpg",
+                                  "Price": "$15.95",
+                                  "ProductId": "G4UTR0005",
+                                  "Size": "L"
+                                },
+                               {"ProductName": "G4U Aviato",
+                                 "ProductImageurl": "http://www.goggles4u.com/media/catalog/product/cache/1/small_image/360x130/9df78eab33525d08d6e5fb8d27136e95/1/1/111746a_1.jpg",
+                                  "Price": "$15.95",
+                                  "ProductId": "G4UTR0006",
+                                  "Size": "L"
+                                }],
+    "CollectionsImageData": [{"Title":"FIND YOUR FRAME","Text":"Looking for the Right Frame for yourself? Browse our Complete Collection Here","ImgUrl":"http://www.goggles4u.com/media/wysiwyg/Find-Your-Frame.jpg"},
+{"Title":"SUBARASHII FRAMES","Text":"Extravagant, with the desire to express something different. Subarashii Collection","ImgUrl":"http://www.goggles4u.com/media/wysiwyg/Subarashii-Collection.jpg"},
+{"Title":"KNOW YOUR SIZE","Text":"Not sure about the frame size that fits you? Find it Right here!","ImgUrl":"http://www.goggles4u.com/media/wysiwyg/Frame-Measuring-Guide.jpg"}]
+   }
+}

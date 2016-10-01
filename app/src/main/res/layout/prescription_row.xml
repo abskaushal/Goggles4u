@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    >
+<LinearLayout
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:layout_margin="2dip"
+    android:weightSum="7">
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:text="@string/presname"
+        android:layout_weight="1.4"
+        android:padding="4dip"
+        android:textColor="@color/gray"
+        android:id="@+id/tv_presname" />
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:padding="4dip"
+        android:textColor="@color/gray"
+        android:layout_weight="1.6"
+        android:id="@+id/tv_presdate"
+        />
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:text="@string/created"
+        android:layout_weight="1.4"
+        android:padding="4dip"
+        android:textColor="@color/gray"
+        android:id="@+id/tv_precreater" />
+
+
+
+    <TextView
+        android:layout_width="0dip"
+        android:text="view"
+        android:layout_weight="0.8"
+        android:layout_height="wrap_content"
+        android:padding="4dip"
+        android:textColor="@color/colorPrimary"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
+        android:layout_marginTop="2dip"
+        android:id="@+id/tv_view" />
+
+    <TextView
+        android:layout_width="0dip"
+        android:padding="4dip"
+        android:textColor="@color/colorPrimary"
+        android:layout_weight="0.7"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="edit"
+        android:textStyle="bold"
+        android:layout_marginTop="2dip"
+        android:id="@+id/tv_edit" />
+
+    <TextView
+        android:layout_width="0dip"
+        android:text="delete"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:padding="4dip"
+        android:layout_marginTop="2dip"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/tv_dlt" />
+</LinearLayout>
+    </android.support.v7.widget.CardView>
