@@ -20,6 +20,7 @@ import com.ts.mobilelab.goggles4u.Login;
 import com.ts.mobilelab.goggles4u.MyAccountActivity;
 import com.ts.mobilelab.goggles4u.MyOrderActivity;
 
+import com.ts.mobilelab.goggles4u.NewFilterActivity;
 import com.ts.mobilelab.goggles4u.OrderReviewActivity;
 import com.ts.mobilelab.goggles4u.Payment;
 import com.ts.mobilelab.goggles4u.PaypalActivity;
@@ -737,7 +738,7 @@ int pageFlag = 0;
         }else if (mCheckcode == AppConstants.CODE_FOR_PRODUCTLISTING) {
             ProductListingActivity.updateUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_FILTERDATA){
-//            NewFilterActivity.updateUi(result, receiveJSon);
+          //  NewFilterActivity.updateUi(result, receiveJSon);
             FilterActivity.parseJson(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_SORTOPTION){
             SortingActivity.updateSortDataUi(result, receiveJSon);

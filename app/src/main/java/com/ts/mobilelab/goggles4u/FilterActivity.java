@@ -7,7 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 
 import com.ts.mobilelab.goggles4u.data.AppConstants;
 import com.ts.mobilelab.goggles4u.filter.FilterAdapter;
@@ -46,6 +49,7 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setLogo(R.drawable.ic_actionbar_logo);
 
 
 
@@ -67,6 +71,15 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
         mFilterOptionsRecyclerView.setLayoutManager(optionsLayoutManager);
         mOptionsAdapter = new FilterOptionsAdapter(this);
         mFilterOptionsRecyclerView.setAdapter(mOptionsAdapter);
+
+        //Control Buttons
+        Button btnClear = (Button) findViewById(R.id.btn_clearfilter);
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOptionsAdapter.clearData();
+            }
+        });
     }
 
     private void initData(String cid) {
@@ -80,6 +93,15 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
         gogglesAsynctask.execute(catejson.toString());
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+            return  true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public static void parseJson(String result, JSONObject receiveJSon) {
         if (result.equals(AppConstants.SUCCESSFUL)) {

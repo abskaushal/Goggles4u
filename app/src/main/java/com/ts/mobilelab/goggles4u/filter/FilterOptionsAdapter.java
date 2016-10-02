@@ -31,6 +31,7 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
         mOptionsList = list;
         notifyDataSetChanged();
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.view_filter_option_item, parent, false);
@@ -49,7 +50,7 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        CheckBox labelCheckBox ;
+        CheckBox labelCheckBox;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -57,4 +58,13 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
         }
     }
 
+    public void clearData() {
+        if (mOptionsList.size() > 0) {
+            for (String s : mOptionsList) {
+                mOptionsList.remove(s);
+            }
+
+            notifyItemRangeRemoved(0, mOptionsList.size());
+        }
+    }
 }

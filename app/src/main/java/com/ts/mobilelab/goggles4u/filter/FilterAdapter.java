@@ -19,6 +19,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     private Context mContext;
     private ArrayList<FilterItem> mFiltersList;
     private ICallback mListener;
+    private int mSelectedPos = 0;
 
     public FilterAdapter(Context context, ArrayList<FilterItem> list, ICallback listener) {
         this.mContext = context;
@@ -36,13 +37,20 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.labelView.setText(mFiltersList.get(position).getFilterName());
+        holder.itemView.setActivated((mSelectedPos == position) ? true : false);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onSelected(mFiltersList.get(position).getFilterCategories());
+                notifyItemChanged(mSelectedPos);
+                mSelectedPos = position;
+                notifyItemChanged(mSelectedPos);
             }
         });
 
+        if (position == 0) {
+            mListener.onSelected(mFiltersList.get(position).getFilterCategories());
+        }
     }
 
     @Override
