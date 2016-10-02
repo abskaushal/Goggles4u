@@ -174,6 +174,9 @@ public class AppConstants {
  public static final String FILTER_ATTRIBUTES = "attributes";
  public static final String FILTER_LABEL = "frontend_label";
  public static final String FILTER_OPTIONS = "options";
+ public static final String FILTER_CODE = "code";
+ public static final String FILTER_ATTRIBUTE_ID = "attribute_id";
+ public static final String FILTER_INPUT_TYPE = "inputtype";
 
 
     public static final String[] IMAGES = new String[]{

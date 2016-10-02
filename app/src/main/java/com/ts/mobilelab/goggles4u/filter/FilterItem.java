@@ -7,21 +7,34 @@ import java.util.ArrayList;
  */
 public class FilterItem {
     private String mName;
-    private ArrayList<String> mCategories;
+    private String mCode;
+    private String mAttributeId;
+    private String mInputType;
+    private ArrayList<FilterOptionItem> mCategories;
 
     public String getFilterName() {
         return mName;
     }
 
-    public ArrayList<String> getFilterCategories() {
-        return mCategories;
-    }
+    public ArrayList<FilterOptionItem> getFilterCategories() { return mCategories; }
+
+    public String getmCode() { return mCode; }
+
+    public String getmAttributeId() { return mAttributeId; }
+
+    public String getmInputType() { return mInputType; }
 
     public void setFilterName(String mName) {
         this.mName = mName;
     }
 
-    public void setFilterCategories(ArrayList<String> mCategories) {
+    public void setFilterCategories(ArrayList<FilterOptionItem> mCategories) {
         this.mCategories = mCategories;
     }
+
+    public void setCode(String mCode) { this.mCode = mCode; }
+
+    public void setAttributeId(String mAttributeId) { this.mAttributeId = mAttributeId; }
+
+    public void setInputType(String mInputType) { this.mInputType = mInputType; }
 }

@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.ts.mobilelab.goggles4u.data.AppConstants;
 import com.ts.mobilelab.goggles4u.filter.FilterAdapter;
 import com.ts.mobilelab.goggles4u.filter.FilterItem;
+import com.ts.mobilelab.goggles4u.filter.FilterOptionItem;
 import com.ts.mobilelab.goggles4u.filter.FilterOptionsAdapter;
 import com.ts.mobilelab.goggles4u.i.ICallback;
 import com.ts.mobilelab.goggles4u.net.GogglesAsynctask;
@@ -109,6 +110,7 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
                 JSONArray jsonArray = receiveJSon.getJSONArray(AppConstants.FILTER_ATTRIBUTES);
                 mFilterItems = new ArrayList<>(jsonArray.length());
                 FilterItem filterItem;
+                FilterOptionItem optionItem;
 
                 for (int i= 0; i< jsonArray.length(); ++i) {
                     JSONObject filterJson = jsonArray.getJSONObject(i);
@@ -117,15 +119,23 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
                     filterItem = new FilterItem();
 
                     String filterName = filterJson.getString(AppConstants.FILTER_LABEL);
-                    ArrayList<String> filterCategories = new ArrayList<>(optionsJson.length());
+                    String fCode = filterJson.getString(AppConstants.FILTER_CODE);
+                    String fAttributeId = filterJson.getString(AppConstants.FILTER_ATTRIBUTE_ID);
+                    String fInputType = filterJson.getString(AppConstants.FILTER_INPUT_TYPE);
+                    ArrayList<FilterOptionItem> filterCategories = new ArrayList<>(optionsJson.length());
                     Iterator<String> keys = optionsJson.keys();
                     while (keys.hasNext()) {
                         String key = keys.next();
-                        filterCategories.add(key);
+                        String value = optionsJson.getString(key);
+                        optionItem = new FilterOptionItem(key, value, false);
+                        filterCategories.add(optionItem);
                     }
 
                     //add data to filterItem
                     filterItem.setFilterName(filterName);
+                    filterItem.setCode(fCode);
+                    filterItem.setAttributeId(fAttributeId);
+                    filterItem.setInputType(fInputType);
                     filterItem.setFilterCategories(filterCategories);
 
                     mFilterItems.add(filterItem);
@@ -158,8 +168,7 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
     // Update OptionsAdapter's data when filter is selected
     public void onSelected(Object o) {
         if ((o != null) && (o instanceof ArrayList)) {
-            mOptionsAdapter.setDataList((ArrayList<String>) o);
-            Log.d(LOG_TAG, "filter selected");
+            mOptionsAdapter.setDataList((ArrayList<FilterOptionItem>) o);
         }
     }
 }

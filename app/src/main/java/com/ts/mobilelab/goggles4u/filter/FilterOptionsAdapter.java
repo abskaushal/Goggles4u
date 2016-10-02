@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.ts.mobilelab.goggles4u.R;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  */
 public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdapter.ViewHolder> {
     private final Context mContext;
-    private ArrayList<String> mOptionsList;
+    private ArrayList<FilterOptionItem> mOptionsList;
 
     public FilterOptionsAdapter(Context context) {
         this.mContext = context;
@@ -24,7 +25,7 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
     }
 
 
-    public void setDataList(ArrayList<String> list) {
+    public void setDataList(ArrayList<FilterOptionItem> list) {
         if (list == null) {
             throw new IllegalArgumentException("There should be atleast one option under each filter");
         }
@@ -40,8 +41,15 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.labelCheckBox.setText(mOptionsList.get(position));
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.labelCheckBox.setText(mOptionsList.get(position).getOptionName());
+        holder.labelCheckBox.setSelected(mOptionsList.get(position).isSelected());
+        holder.labelCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mOptionsList.get(position).setSelected(isChecked);
+            }
+        });
     }
 
     @Override
@@ -60,9 +68,9 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
 
     public void clearData() {
         if (mOptionsList.size() > 0) {
-            for (String s : mOptionsList) {
-                mOptionsList.remove(s);
-            }
+//            for (String s : mOptionsList) {
+//                mOptionsList.remove(s);
+//            }
 
             notifyItemRangeRemoved(0, mOptionsList.size());
         }
