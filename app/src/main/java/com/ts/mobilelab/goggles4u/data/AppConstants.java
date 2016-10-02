@@ -170,6 +170,11 @@ public class AppConstants {
     public static int CODE_FOR_HELPROW= 158;
     public static int CODE_FOR_STORECREDIT_UPDATE= 159;
 
+ //JSON keys for filters
+ public static final String FILTER_ATTRIBUTES = "attributes";
+ public static final String FILTER_LABEL = "frontend_label";
+ public static final String FILTER_OPTIONS = "options";
+
 
     public static final String[] IMAGES = new String[]{
             // Heavy images

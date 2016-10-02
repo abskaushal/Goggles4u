@@ -332,7 +332,8 @@ public class ProductListingActivity extends AppCompatActivity {
     private View.OnClickListener filterListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivityForResult(new Intent(mContext, NewFilterActivity.class).putExtra("cat_id", categoryId), 111);
+//            startActivityForResult(new Intent(mContext, NewFilterActivity.class).putExtra("cat_id", categoryId), 111);
+            startActivityForResult(new Intent(mContext, FilterActivity.class).putExtra("cat_id", categoryId), 111);
         }
     };
     private View.OnClickListener sortingListener = new View.OnClickListener() {
