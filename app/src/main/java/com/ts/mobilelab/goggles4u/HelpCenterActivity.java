@@ -2,12 +2,10 @@ package com.ts.mobilelab.goggles4u;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -103,6 +101,15 @@ public class HelpCenterActivity extends AppCompatActivity {
         }
 
         mHelpListView.setAdapter(new HelpListAdapter(mContext,helpdataList));
+
+    }
+
+    public void dialPhoneNumber(View view) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:9663262419"));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
 
     }
 }
