@@ -171,6 +171,34 @@
             android:textStyle="normal" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dip">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="30dip"
+            android:minWidth="30dip"
+            android:padding="4dip"
+            android:src="@drawable/ic_live_help_24dp" />
+
+        <TextView
+            android:id="@+id/nav_upload_prescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="24dip"
+            android:text="Upload Prescription"
+            android:textColor="@color/deep_gray"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"

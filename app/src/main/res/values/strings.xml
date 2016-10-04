@@ -51,6 +51,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_name">Enter your name</string>
     <string name="action_register">Register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -160,5 +161,6 @@
     <string name="title_activity_help_row">Help Details</string>
     <string name="title_activity_order_complete">Order Success</string>
     <string name="title_activity_product_listing_new">ProductListingNew</string>
+    <string name="title_activity_upload_prescription">Upload Prescription</string>
 
 </resources>

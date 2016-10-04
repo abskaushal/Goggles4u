@@ -74,7 +74,7 @@ public class HomeActivity extends AppCompatActivity implements
     private ImageView profileImg;
     private TextView userName, userid;
     private  TextView userlogin, usersignup, userlogout;
-    private TextView menu_home,menu_myacnt, menu_contactus,menu_myorder, menu_helpcenter,menu_favlist;
+    private TextView menu_home,menu_myacnt, menu_contactus,menu_myorder, menu_helpcenter, menu_upload_prescription,menu_favlist;
     private  ImageView imagereload;
     private Context mContext;
     private PagerAdapter mAdapter;
@@ -211,6 +211,7 @@ public class HomeActivity extends AppCompatActivity implements
         menu_myorder = (TextView) mFooterView.findViewById(R.id.nav_myorder);
         menu_contactus = (TextView) mFooterView.findViewById(R.id.nav_rateus);
         menu_helpcenter = (TextView) mFooterView.findViewById(R.id.nav_help);
+        menu_upload_prescription = (TextView) mFooterView.findViewById(R.id.nav_upload_prescription);
         menu_favlist = (TextView) mFooterView.findViewById(R.id.nav_favorite);
 
         menu_home.setOnClickListener(homeListener);
@@ -218,6 +219,7 @@ public class HomeActivity extends AppCompatActivity implements
         menu_myorder.setOnClickListener(myorderListener);
         menu_favlist.setOnClickListener(fabListener);
         menu_helpcenter.setOnClickListener(helpListener);
+        menu_upload_prescription.setOnClickListener(uploadPrescriptionHandler);
         menu_contactus.setOnClickListener(contactListener);
 
         userlogin.setOnClickListener(new OnClickListener() {
@@ -597,11 +599,19 @@ public class HomeActivity extends AppCompatActivity implements
         public void onClick(View v) {
             startActivity(new Intent(mContext, HelpCenterActivity.class));
         }
-    };//contactListener
+    };
+    //contactListener
     private OnClickListener contactListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             startActivity(new Intent(mContext, ContactUs.class));
+        }
+    };
+    //upload prescription Handler
+    private OnClickListener uploadPrescriptionHandler = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(mContext, UploadPrescriptionActivity.class));
         }
     };
 

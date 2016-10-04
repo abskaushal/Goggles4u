@@ -78,8 +78,8 @@
         <activity
             android:name=".FilterActivity"
             android:label="@string/title_activity_filter"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProductDetailsActivity"
             android:label="@string/title_activity_product_details"
@@ -243,12 +243,19 @@
         <activity
             android:name=".ProductListingNew"
             android:label="@string/title_activity_product_listing_new"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".UploadPrescriptionActivity"
+            android:label="@string/title_activity_upload_prescription"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
