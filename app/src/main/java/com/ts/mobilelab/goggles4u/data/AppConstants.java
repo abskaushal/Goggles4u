@@ -90,6 +90,8 @@ public class AppConstants {
     public static final String FAVLIST_URL = "http://www.giftbox.pk/restapi/catalog/listBookmark";
     public static final String STORECREDIT_UPDATE_URL = "http://www.giftbox.pk/restapi/checkout/setStoreCredit";
 
+   public static final String UPLOAD_IMAGE_URL = "http://www.giftbox.pk/restapi/product/uploadprescription";
+
 
     public static final String FAILURE = "FAILURE";
 

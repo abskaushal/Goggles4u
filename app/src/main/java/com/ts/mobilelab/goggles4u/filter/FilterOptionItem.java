@@ -1,7 +1,7 @@
 package com.ts.mobilelab.goggles4u.filter;
 
 /**
- * Created by Mohit on 02-10-2016.
+ * Created by Abhishek on 02-10-2016.
  */
 public class FilterOptionItem {
     private  String mOptionName;

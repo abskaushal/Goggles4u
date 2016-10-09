@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ts.mobilelab.goggles4u.R;
 import com.ts.mobilelab.goggles4u.i.ICallback;
+import com.ts.mobilelab.goggles4u.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -37,20 +39,23 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.labelView.setText(mFiltersList.get(position).getFilterName());
+        holder.imageView.setImageResource(Utils.getDrawable(mFiltersList.get(position).getFilterName()));
         holder.itemView.setActivated((mSelectedPos == position) ? true : false);
+        holder.itemView.setOnClickListener(null);
+        holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onSelected(mFiltersList.get(position).getFilterCategories());
-                notifyItemChanged(mSelectedPos);
-                mSelectedPos = position;
-                notifyItemChanged(mSelectedPos);
+                int pos = (int) v.getTag();
+                mSelectedPos = pos;
+                boolean multiSelect = mFiltersList.get(pos).getmInputType().equals("select")?true:false;
+                mListener.onSelected(mFiltersList.get(pos).getFilterCategories(),multiSelect);
+                notifyDataSetChanged();
+
             }
         });
 
-        if (position == 0) {
-            mListener.onSelected(mFiltersList.get(position).getFilterCategories());
-        }
+
     }
 
     @Override
@@ -60,12 +65,14 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView labelView;
+        ImageView imageView;
         View itemView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             labelView = (TextView) itemView.findViewById(R.id.textview_filter_item);
+            imageView = (ImageView) itemView.findViewById(R.id.imageview_filter_item);
         }
     }
 }

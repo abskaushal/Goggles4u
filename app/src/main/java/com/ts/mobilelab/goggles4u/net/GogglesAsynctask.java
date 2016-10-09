@@ -739,7 +739,7 @@ int pageFlag = 0;
             ProductListingActivity.updateUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_FILTERDATA){
           //  NewFilterActivity.updateUi(result, receiveJSon);
-            FilterActivity.parseJson(result, receiveJSon);
+           // FilterActivity.parseJson(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_SORTOPTION){
             SortingActivity.updateSortDataUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_SORTOPTION_SUBMIT){

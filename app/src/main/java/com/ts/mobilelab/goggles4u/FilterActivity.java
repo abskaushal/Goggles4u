@@ -1,6 +1,7 @@
 package com.ts.mobilelab.goggles4u;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ts.mobilelab.goggles4u.data.AppConstants;
 import com.ts.mobilelab.goggles4u.filter.FilterAdapter;
 import com.ts.mobilelab.goggles4u.filter.FilterItem;
 import com.ts.mobilelab.goggles4u.filter.FilterOptionItem;
 import com.ts.mobilelab.goggles4u.filter.FilterOptionsAdapter;
+import com.ts.mobilelab.goggles4u.filter.GetFilterAsync;
+import com.ts.mobilelab.goggles4u.filter.IFilterData;
 import com.ts.mobilelab.goggles4u.i.ICallback;
 import com.ts.mobilelab.goggles4u.net.GogglesAsynctask;
 
@@ -27,20 +31,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class FilterActivity extends AppCompatActivity implements ICallback {
+public class FilterActivity extends AppCompatActivity implements ICallback, IFilterData {
+
     public static final String LOG_TAG = FilterActivity.class.getSimpleName();
-    private static final String[] COUNTRIES = new String[] {
-            "Belgium", "France", "Italy", "Germany", "Spain"
-    };
     private static ArrayList<FilterItem> mFilterItems;
     private static Context sContext;
     private static FilterActivity sInstance;
     private static RecyclerView mFilterListRecyclerView;
     private static RecyclerView mFilterOptionsRecyclerView;
     private FilterOptionsAdapter mOptionsAdapter;
+    private String cid = "";
 
-
-    private  int genderflag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,7 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
         toolbar.setLogo(R.drawable.ic_actionbar_logo);
 
 
-
-        String cid = getIntent().getStringExtra("cat_id");
+        cid = getIntent().getStringExtra("cat_id");
         initData(cid);
 
         // Filters List Recycler View
@@ -74,20 +74,28 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
         mFilterOptionsRecyclerView.setAdapter(mOptionsAdapter);
 
         //Control Buttons
-        Button btnClear = (Button) findViewById(R.id.btn_clearfilter);
+        Button btnClear = (Button) findViewById(R.id.btn_clear);
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOptionsAdapter.clearData();
+                clearFilter();
+            }
+        });
+
+        Button applyFilter = (Button) findViewById(R.id.btn_apply);
+        applyFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                applyFilter();
             }
         });
     }
 
     private void initData(String cid) {
-        GogglesAsynctask gogglesAsynctask = new GogglesAsynctask(this, AppConstants.CODE_FOR_FILTERDATA);
+        GetFilterAsync gogglesAsynctask = new GetFilterAsync(FilterActivity.this, this);
         JSONObject catejson = new JSONObject();
         try {
-            catejson.put("cat_id",cid);
+            catejson.put("cat_id", cid);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -97,14 +105,23 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
-            return  true;
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public static void parseJson(String result, JSONObject receiveJSon) {
+    @Override
+    // Update OptionsAdapter's data when filter is selected
+    public void onSelected(Object o, boolean multiSelect) {
+        if ((o != null) && (o instanceof ArrayList)) {
+            mOptionsAdapter.setDataList((ArrayList<FilterOptionItem>) o, multiSelect);
+        }
+    }
+
+    @Override
+    public void onFilterDataReceived(String result, JSONObject receiveJSon) {
         if (result.equals(AppConstants.SUCCESSFUL)) {
             try {
                 JSONArray jsonArray = receiveJSon.getJSONArray(AppConstants.FILTER_ATTRIBUTES);
@@ -112,7 +129,7 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
                 FilterItem filterItem;
                 FilterOptionItem optionItem;
 
-                for (int i= 0; i< jsonArray.length(); ++i) {
+                for (int i = 0; i < jsonArray.length(); ++i) {
                     JSONObject filterJson = jsonArray.getJSONObject(i);
                     JSONObject optionsJson = filterJson.getJSONObject(AppConstants.FILTER_OPTIONS);
 
@@ -144,31 +161,108 @@ public class FilterActivity extends AppCompatActivity implements ICallback {
             } catch (JSONException je) {
                 je.printStackTrace();
                 Log.e(LOG_TAG, "Error in parsing Filter Item");
-            }
-            finally {
+            } finally {
                 if (mFilterItems != null && mFilterItems.size() > 0) {
                     FilterAdapter adapter = new FilterAdapter(sContext, mFilterItems, sInstance);
                     mFilterListRecyclerView.setAdapter(adapter);
+                    onSelected(mFilterItems.get(0).getFilterCategories(), false);
                 }
             }
-//            sInstance.reciveJson = receiveJSon;
-//            sInstance.msgview.setVisibility(View.GONE);
-//            sInstance.displayData(receiveJSon);
-
-
-        }else{
-//            Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
-//            sInstance.linear_btnsave.setVisibility(View.GONE);
-        }
-
-    }
-
-
-    @Override
-    // Update OptionsAdapter's data when filter is selected
-    public void onSelected(Object o) {
-        if ((o != null) && (o instanceof ArrayList)) {
-            mOptionsAdapter.setDataList((ArrayList<FilterOptionItem>) o);
         }
     }
+
+
+    /**
+     * Prepare the filter array based on selected filters and apply it.
+     */
+    private void applyFilter() {
+        JSONArray filterArray = new JSONArray();
+        JSONObject filterObject = null;
+        boolean filled = false;
+        if (mFilterItems != null) {
+
+
+            for (FilterItem item : mFilterItems) {
+                ArrayList<FilterOptionItem> list = item.getFilterCategories();
+                //fill the select input type
+
+                if (item.getmInputType().equals("select")) {
+                    filterObject = new JSONObject();
+                    for (FilterOptionItem optionItem : list) {
+
+                        if (optionItem.isSelected()) {
+
+                            try {
+                                filterObject.put("attribute", item.getmCode());
+                                filterObject.put("" + item.getmCode(), optionItem.getOptionValue());
+                                filterObject.put("inputtype", "select");
+                                filterArray.put(filterObject);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                } else {
+
+                    //fill the MultiSelect input type
+                    StringBuffer buffer = null;
+                    filled = false;
+                    filterObject = new JSONObject();
+                    buffer = new StringBuffer();
+                    for (FilterOptionItem optionItem : list) {
+
+                        if (optionItem.isSelected()) {
+                            filled = true;
+                            if (buffer.length() != 0)
+                                buffer.append(",");
+                            buffer.append(optionItem.getOptionValue());
+
+                        }
+                    }
+
+                    if (filled) {
+                        try {
+                            filterObject.put("attribute", item.getmCode());
+                            filterObject.put("" + item.getmCode(), buffer.toString());
+                            filterObject.put("inputtype", "Multiselect");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        filterArray.put(filterObject);
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        if (filterArray.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Please select above option to filter.", Toast.LENGTH_LONG).show();
+        } else {
+            Intent in = new Intent(getApplicationContext(), ProductListingActivity.class);
+            in.putExtra("FilterValue", filterArray.toString());
+            in.putExtra("cat_id", cid);
+
+            startActivity(in);
+        }
+    }
+
+    /**
+     * Clear the filter data and reset the adapter
+     */
+    private void clearFilter() {
+        if (mFilterItems != null) {
+            for (FilterItem item : mFilterItems) {
+                ArrayList<FilterOptionItem> list = item.getFilterCategories();
+                for (FilterOptionItem filterOptionItem : list) {
+                    filterOptionItem.setSelected(false);
+                }
+            }
+        }
+
+        mOptionsAdapter.notifyDataSetChanged();
+    }
+
 }

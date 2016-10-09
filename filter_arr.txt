@@ -1,0 +1,1 @@
+[{"attribute":"price","price":"10-20","inputtype":"Multiselect"},{"attribute":"frame_style","frame_style":"29","inputtype":"select"},{"attribute":"color","color":"100","inputtype":"select"},{"attribute":"pd","pd":"195,191","inputtype":"Multiselect"}]

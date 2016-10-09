@@ -1,7 +1,9 @@
 package com.ts.mobilelab.goggles4u;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.os.PersistableBundle;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -611,7 +614,11 @@ public class HomeActivity extends AppCompatActivity implements
     private OnClickListener uploadPrescriptionHandler = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(mContext, UploadPrescriptionActivity.class));
+            if(mPreferenceData.isLogincheck()) {
+                startActivity(new Intent(mContext, UploadPrescriptionActivity.class));
+            }else{
+                showLoginDialog();
+            }
         }
     };
 
@@ -678,5 +685,21 @@ public class HomeActivity extends AppCompatActivity implements
         } else {
             Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
         }
+    }
+
+
+    private void showLoginDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this)
+                .setTitle("Login")
+                .setMessage("Please login first to upload the prescription")
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 }

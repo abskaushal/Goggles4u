@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 
 import com.ts.mobilelab.goggles4u.R;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdapter.ViewHolder> {
     private final Context mContext;
     private ArrayList<FilterOptionItem> mOptionsList;
+    private boolean mMultiSelect = false;
 
     public FilterOptionsAdapter(Context context) {
         this.mContext = context;
@@ -25,11 +27,12 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
     }
 
 
-    public void setDataList(ArrayList<FilterOptionItem> list) {
+    public void setDataList(ArrayList<FilterOptionItem> list, boolean isMultiSelect) {
         if (list == null) {
             throw new IllegalArgumentException("There should be atleast one option under each filter");
         }
         mOptionsList = list;
+        mMultiSelect = isMultiSelect;
         notifyDataSetChanged();
     }
 
@@ -42,12 +45,39 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
+
         holder.labelCheckBox.setText(mOptionsList.get(position).getOptionName());
-        holder.labelCheckBox.setSelected(mOptionsList.get(position).isSelected());
+        holder.labelCheckBox.setOnCheckedChangeListener(null);
+        holder.labelCheckBox.setChecked(mOptionsList.get(position).isSelected());
+        holder.labelCheckBox.setTag(position);
+
+        holder.radioButton.setText(mOptionsList.get(position).getOptionName());
+        holder.radioButton.setOnCheckedChangeListener(null);
+        holder.radioButton.setChecked(mOptionsList.get(position).isSelected());
+        holder.radioButton.setTag(position);
+
+        if(mMultiSelect){
+            holder.radioButton.setVisibility(View.GONE);
+            holder.labelCheckBox.setVisibility(View.VISIBLE);
+        }else{
+            holder.radioButton.setVisibility(View.VISIBLE);
+            holder.labelCheckBox.setVisibility(View.GONE);
+        }
+        holder.radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int tag = (int) buttonView.getTag();
+                resetMultiselect(tag);
+            }
+        });
         holder.labelCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mOptionsList.get(position).setSelected(isChecked);
+                int tag = (int) buttonView.getTag();
+
+                    mOptionsList.get(tag).setSelected(isChecked);
+
             }
         });
     }
@@ -59,10 +89,12 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         CheckBox labelCheckBox;
+        RadioButton radioButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
             labelCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox_filter_option);
+            radioButton = (RadioButton) itemView.findViewById(R.id.radio_filter_option);
         }
     }
 
@@ -74,5 +106,15 @@ public class FilterOptionsAdapter extends RecyclerView.Adapter<FilterOptionsAdap
 
             notifyItemRangeRemoved(0, mOptionsList.size());
         }
+    }
+
+    private synchronized void resetMultiselect(int position){
+        for(FilterOptionItem item: mOptionsList){
+            item.setSelected(false);
+        }
+
+        mOptionsList.get(position).setSelected(true);
+        notifyDataSetChanged();
+
     }
 }

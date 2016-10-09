@@ -106,7 +106,7 @@ public class HelpCenterActivity extends AppCompatActivity {
 
     public void dialPhoneNumber(View view) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:9663262419"));
+        intent.setData(Uri.parse("tel:123456789"));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }

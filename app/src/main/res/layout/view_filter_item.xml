@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:src="@drawable/ic_menu_send"
-        android:id="@+id/imageView_filter_item" />
+        android:id="@+id/imageview_filter_item" />
 
     <TextView
         android:layout_width="match_parent"

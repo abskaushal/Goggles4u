@@ -49,4 +49,5 @@ dependencies {
     compile 'com.artemzin.rxjava:proguard-rules:1.1.1.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
 }

@@ -8,5 +8,5 @@ import java.util.Objects;
  * callback from other application components
  */
 public interface ICallback {
-    public void onSelected(Object o);
+    public void onSelected(Object o, boolean multiSelect);
 }
