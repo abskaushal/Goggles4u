@@ -163,4 +163,19 @@
     <string name="title_activity_product_listing_new">ProductListingNew</string>
     <string name="title_activity_upload_prescription">Upload Prescription</string>
 
+
+    <string name="prescription_eyeglasses">PRESCRIPTION EYEGLASSES</string>
+    <string name="designer_glasses">DESIGNER GLASSES</string>
+    <string name="home">HOME</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Log In</string>
+    <string name="invite_friends">Invite a Friend</string>
+    <string name="logout">Logout</string>
+    <string name="my_orders">MY ORDERS</string>
+    <string name="favorites">FAVORITES</string>
+    <string name="upload_prescription">UPLOAD PRESCRIPTION</string>
+    <string name="my_account">MY ACCOUNT</string>
+    <string name="help_center">HELP CENTER</string>
+    <string name="settings">SETTINGS</string>
+
 </resources>

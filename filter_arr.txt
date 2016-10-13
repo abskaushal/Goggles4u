@@ -1,1 +1,23 @@
-[{"attribute":"price","price":"10-20","inputtype":"Multiselect"},{"attribute":"frame_style","frame_style":"29","inputtype":"select"},{"attribute":"color","color":"100","inputtype":"select"},{"attribute":"pd","pd":"195,191","inputtype":"Multiselect"}]
+The features which we need to do apart from the once for which you have quoted:
+
+# Display the review per product in new screen
+
+# Post a review for the product.
+
+# Some design changes for the select prescription in product page and sort in list page which I will provide  The design is not completely changed.
+
+# While selecting the Sorting option the user is taken away from the list page. We can keep the filter and sorting option as a pop-up window on the same page.
+
+# There should be a +/- sign next to the quantity
+
+# Searching multiple results one after the other and then going back to the previous screen results in the app going back to the previous search results eg if search ‘g4u’ and then search ‘aviator’. When pressing I go back to the ‘g4u’ results rather than going back to the home screen
+
+# The app is unstable getting lots of “unfortunately, Goggles4u has stopped’ crashes. – can you put crash logs tracker..
+
+# The app crashes after entering a coupon code, After re-launching the app it shows a notification on my cart option once selecting that the app again crashes. Have to clear the data and cache to make it work again
+
+# Also if you order the same glasses with the same option twice (or by accident) the delete button deletes both rather than one
+
+# The app drains battery
+
+# We need to add "Reorder" option in My Account (same as website functionality)

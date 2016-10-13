@@ -171,10 +171,10 @@ public class MyAccountActivity extends AppCompatActivity implements  NavigationV
 
         //profileImg = (ImageView) headerView.findViewById(R.id.imv_nav_profile);
         userName = (TextView) headerView.findViewById(R.id.tv_nav_profilename);
-        userid = (TextView) headerView.findViewById(R.id.tv_nav_profileid);
+        /*userid = (TextView) headerView.findViewById(R.id.tv_nav_profileid);
         userlogin = (TextView) headerView.findViewById(R.id.btn_login);
         usersignup = (TextView) headerView.findViewById(R.id.btn_signup);
-        userlogout = (TextView) headerView.findViewById(R.id.btn_logout);
+        userlogout = (TextView) headerView.findViewById(R.id.btn_logout);*/
 
         mProgresbar = (ProgressBar) headerView.findViewById(R.id.progressBar_banner);
         sInstance.mProgresbar.setVisibility(View.GONE);

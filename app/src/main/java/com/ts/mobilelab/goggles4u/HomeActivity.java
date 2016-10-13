@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -75,10 +76,10 @@ public class HomeActivity extends AppCompatActivity implements
     private ViewPagerAdapter mViewpagerAdater;
 
     private ImageView profileImg;
-    private TextView userName, userid;
-    private  TextView userlogin, usersignup, userlogout;
-    private TextView menu_home,menu_myacnt, menu_contactus,menu_myorder, menu_helpcenter, menu_upload_prescription,menu_favlist;
-    private  ImageView imagereload;
+    private TextView userName;
+    private Button signUpBtn, loginBtn, logoutBtn, inviteFriendbtn;
+    private LinearLayout menu_home, menu_myacnt, menu_contactus, menu_myorder, menu_helpcenter, menu_upload_prescription, menu_favlist;
+    private ImageView imagereload;
     private Context mContext;
     private PagerAdapter mAdapter;
     private static final String STATE_POSITION = "STATE_POSITION";
@@ -131,7 +132,7 @@ public class HomeActivity extends AppCompatActivity implements
 
         listview_products = (HorizontalListView) findViewById(R.id.listview);
         listview_collections = (HorizontalListView) findViewById(R.id.listview_collection);
-       mPageindicator = (CirclePageIndicator) findViewById(R.id.indicator);
+        mPageindicator = (CirclePageIndicator) findViewById(R.id.indicator);
         homelt = (LinearLayout) findViewById(R.id.linearhome_header);
         nwlt = (RelativeLayout) findViewById(R.id.reltive_nwlt);
         imagereload = (ImageView) findViewById(R.id.imv_reload);
@@ -139,10 +140,10 @@ public class HomeActivity extends AppCompatActivity implements
         bannerImgList = GogglesManager.getInstance().getBannerImgList();
         newArrivalDataList = GogglesManager.getInstance().getNewArrivalDataList();
         colectionList = GogglesManager.getInstance().getImageDataList();
-        Log.v("bannerImgList ndata",newArrivalDataList.size()+"rr"+bannerImgList.size());
-        if(bannerImgList.size() == 0 || newArrivalDataList.size() == 0){
+        Log.v("bannerImgList ndata", newArrivalDataList.size() + "rr" + bannerImgList.size());
+        if (bannerImgList.size() == 0 || newArrivalDataList.size() == 0) {
             init();
-        }else{
+        } else {
             sInstance.homelt.setVisibility(View.VISIBLE);
             showHomeData();
             //mViewPagerBanner.setAdapter(new BannerImageAdapter(mContext, bannerImgList, "fromhome"));
@@ -170,52 +171,52 @@ public class HomeActivity extends AppCompatActivity implements
         // toggle.onDrawerOpened(navigationView);
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         String device_id = telephonyManager.getDeviceId();
-       // Log.v("device_id", "" + device_id);
+        // Log.v("device_id", "" + device_id);
         mPreferenceData.setDEVICE_ID(device_id);
 
         //profileImg = (ImageView) headerView.findViewById(R.id.imv_nav_profile);
         userName = (TextView) headerView.findViewById(R.id.tv_nav_profilename);
-        userid = (TextView) headerView.findViewById(R.id.tv_nav_profileid);
-        userlogin = (TextView) headerView.findViewById(R.id.btn_login);
-        usersignup = (TextView) headerView.findViewById(R.id.btn_signup);
-        userlogout = (TextView) headerView.findViewById(R.id.btn_logout);
+        signUpBtn = (Button) headerView.findViewById(R.id.sign_up);
+        loginBtn = (Button) headerView.findViewById(R.id.login);
+        logoutBtn = (Button) headerView.findViewById(R.id.logout);
+        inviteFriendbtn = (Button) headerView.findViewById(R.id.invite_friend);
         mProgresbar = (ProgressBar) headerView.findViewById(R.id.progressBar_banner);
         drawerexpandList = (ExpandableListView) headerView.findViewById(R.id.lvexp_categ);
         mFooterView = View.inflate(HomeActivity.this, R.layout.home_menu_view, null);
         drawerexpandList.addFooterView(mFooterView);
 
-       // Log.v("cartid", "ww" + mPreferenceData.getCartQuoteID());
+        // Log.v("cartid", "ww" + mPreferenceData.getCartQuoteID());
         //Log.v("itm count", "ww" + mPreferenceData.getCartItemCount());
-        if(!mPreferenceData.getCartQuoteID().isEmpty()){
+        if (!mPreferenceData.getCartQuoteID().isEmpty()) {
 
             //cartitemcount = 2;
             //tv.setText(""+mPreferenceData.getCartItemCount());
             //supportInvalidateOptionsMenu();
-           // Log.v("pref",""+mPreferenceData.getCartItemCount());
+            // Log.v("pref",""+mPreferenceData.getCartItemCount());
             mNotifCount = Integer.parseInt(mPreferenceData.getCartItemCount());
             //Log.v("mNotifCount","1st"+mNotifCount);
-        }else{
+        } else {
             mNotifCount = 0;
         }
 
         drawerexpandList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-               // Log.v("getTag", childPosition + "" + v.getTag());
+                // Log.v("getTag", childPosition + "" + v.getTag());
                 String f = (String) v.getTag();
 
-                startActivity(new Intent(mContext, ProductListingActivity.class).putExtra("cat_id", f).putExtra("fromintent","category"));
+                startActivity(new Intent(mContext, ProductListingActivity.class).putExtra("cat_id", f).putExtra("fromintent", "category"));
 
                 return true;
             }
         });
-         menu_home = (TextView) headerView.findViewById(R.id.nav_home);
-        menu_myacnt = (TextView) mFooterView.findViewById(R.id.nav_my_account);
-        menu_myorder = (TextView) mFooterView.findViewById(R.id.nav_myorder);
-        menu_contactus = (TextView) mFooterView.findViewById(R.id.nav_rateus);
-        menu_helpcenter = (TextView) mFooterView.findViewById(R.id.nav_help);
-        menu_upload_prescription = (TextView) mFooterView.findViewById(R.id.nav_upload_prescription);
-        menu_favlist = (TextView) mFooterView.findViewById(R.id.nav_favorite);
+        menu_home = (LinearLayout) headerView.findViewById(R.id.nav_home);
+        menu_myacnt = (LinearLayout) mFooterView.findViewById(R.id.nav_my_account);
+        menu_myorder = (LinearLayout) mFooterView.findViewById(R.id.nav_myorder);
+        menu_contactus = (LinearLayout) mFooterView.findViewById(R.id.nav_rateus);
+        menu_helpcenter = (LinearLayout) mFooterView.findViewById(R.id.nav_help);
+        menu_upload_prescription = (LinearLayout) mFooterView.findViewById(R.id.nav_upload_prescription);
+        menu_favlist = (LinearLayout) mFooterView.findViewById(R.id.nav_favorite);
 
         menu_home.setOnClickListener(homeListener);
         menu_myacnt.setOnClickListener(myacntListener);
@@ -223,29 +224,26 @@ public class HomeActivity extends AppCompatActivity implements
         menu_favlist.setOnClickListener(fabListener);
         menu_helpcenter.setOnClickListener(helpListener);
         menu_upload_prescription.setOnClickListener(uploadPrescriptionHandler);
-        menu_contactus.setOnClickListener(contactListener);
+//        menu_contactus.setOnClickListener(contactListener);
 
-        userlogin.setOnClickListener(new OnClickListener() {
+        loginBtn.setOnClickListener(new OnClickListener() {
             @Override
 
             public void onClick(View v) {
                 startActivity(new Intent(mContext, Login.class));
             }
         });
-        usersignup.setOnClickListener(new OnClickListener() {
+        signUpBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mContext, RegistrationActivity.class));
             }
         });
-        userlogout.setOnClickListener(new OnClickListener() {
+        logoutBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 mPreferenceData.setLogincheck(false);
-                userlogout.setVisibility(View.GONE);
-                //userlogin.setVisibility(View.VISIBLE);
-                // usersignup.setVisibility(View.VISIBLE);
                 mPreferenceData.setCustomerFName("");
                 mPreferenceData.setCustomerLName("");
                 mPreferenceData.setCustomerId("");
@@ -265,14 +263,12 @@ public class HomeActivity extends AppCompatActivity implements
         loginLogoutcheck();
 
 
-
-
         listview_products.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String skuid = newArrivalDataList.get(position).getProductSku();
-               // Log.v("skuid",""+skuid);
+                // Log.v("skuid",""+skuid);
 
                 startActivity(new Intent(mContext, ProductDetailsActivity.class).putExtra("skuid", skuid));
                 //.putExtra("fromintent","home"));
@@ -288,8 +284,10 @@ public class HomeActivity extends AppCompatActivity implements
         int pagerPosition = savedInstanceState == null ? 0 : savedInstanceState.getInt(STATE_POSITION);
 
     }
+
     JSONObject homejson;
-    private  void setCategoryData(JSONObject receiveJSon){
+
+    private void setCategoryData(JSONObject receiveJSon) {
         homejson = receiveJSon;
 
     }
@@ -309,32 +307,32 @@ public class HomeActivity extends AppCompatActivity implements
 
         @Override
         public void onDrawerOpened(View view) {
-           // Log.v("categoryMapData",""+categoryMapData.size());
+            // Log.v("categoryMapData",""+categoryMapData.size());
             //Log.v("mPreferenceData categoryData",""+mPreferenceData.getCategoryData());
             //Log.v("getCategorycacheFlag",""+mPreferenceData.getCategorycacheFlag());
             //Log.v("homejson",""+homejson);
-            if(homejson != null) {
+            if (homejson != null) {
                 try {
                     cachflagserver = homejson.getString("navcache");
-                  //  Log.v("cachflagserver", "" + cachflagserver);
+                    //  Log.v("cachflagserver", "" + cachflagserver);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             //Log.v("cachflagserver", "" + cachflagserver);
-            if(mPreferenceData.getCategoryData().isEmpty()){
+            if (mPreferenceData.getCategoryData().isEmpty()) {
                 //if (categoryMapData.size() == 0) {
-                    initCategoryData();
-               // }
+                initCategoryData();
+                // }
 
-            } else if(homejson != null){
-                if(!cachflagserver.equals(mPreferenceData.getCategorycacheFlag())) {
+            } else if (homejson != null) {
+                if (!cachflagserver.equals(mPreferenceData.getCategorycacheFlag())) {
                     initCategoryData();
-                }else{
+                } else {
                     mProgresbar.setVisibility(View.GONE);
                     showCategoryData();
                 }
-            }else{
+            } else {
                 mProgresbar.setVisibility(View.GONE);
                 showCategoryData();
             }
@@ -357,28 +355,28 @@ public class HomeActivity extends AppCompatActivity implements
 
     private void showCategoryData() {
         String catgData = mPreferenceData.getCategoryData();
-        HashMap<String,ArrayList<ChildData>> hashMap = new HashMap<>();
+        HashMap<String, ArrayList<ChildData>> hashMap = new HashMap<>();
 
-        try{
-        JSONArray resultAry = new JSONArray(catgData);
-        for(int i=0;i<resultAry.length();i++) {
-            JSONObject json = resultAry.getJSONObject(i);
+        try {
+            JSONArray resultAry = new JSONArray(catgData);
+            for (int i = 0; i < resultAry.length(); i++) {
+                JSONObject json = resultAry.getJSONObject(i);
 
-            ArrayList<ChildData> childList = new ArrayList<>();
-            JSONArray childry = json.getJSONArray("child");
+                ArrayList<ChildData> childList = new ArrayList<>();
+                JSONArray childry = json.getJSONArray("child");
 
-            for (int j = 0; j < childry.length(); j++) {
-                JSONObject childjson = childry.getJSONObject(j);
-                ChildData childData = new ChildData();
-                childData.setParent(childjson.getString("parent"));
-                childData.setName(childjson.getString("name"));
-                childData.setId(childjson.getString("id"));
-                childList.add(childData);
+                for (int j = 0; j < childry.length(); j++) {
+                    JSONObject childjson = childry.getJSONObject(j);
+                    ChildData childData = new ChildData();
+                    childData.setParent(childjson.getString("parent"));
+                    childData.setName(childjson.getString("name"));
+                    childData.setId(childjson.getString("id"));
+                    childList.add(childData);
 
+                }
+                hashMap.put(json.getString("name"), childList);
             }
-            hashMap.put(json.getString("name"), childList);
-        }
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         GogglesManager.getInstance().setCategoryMap(hashMap);
@@ -398,19 +396,11 @@ public class HomeActivity extends AppCompatActivity implements
 
 
             userName.setVisibility(View.VISIBLE);
-            userid.setVisibility(View.VISIBLE);
             userName.setText("Hi" + " " + mPreferenceData.getCustomerFName());
-            userid.setText(mPreferenceData.getCustomerMailId());
-            userlogin.setVisibility(View.GONE);
-            usersignup.setVisibility(View.GONE);
-            userlogout.setVisibility(View.VISIBLE);
+
         } else {
-            // profileImg.setVisibility(View.GONE);
-            userlogout.setVisibility(View.GONE);
-            userlogin.setVisibility(View.VISIBLE);
-            usersignup.setVisibility(View.VISIBLE);
+
             userName.setText("Hi Guest");
-            userid.setVisibility(View.GONE);
 
         }
 
@@ -422,10 +412,10 @@ public class HomeActivity extends AppCompatActivity implements
         newArrivalDataList = GogglesManager.getInstance().getNewArrivalDataList();
         colectionList = GogglesManager.getInstance().getImageDataList();
 
-        mViewPagerBanner.setAdapter(new BannerImageAdapter(mContext, bannerImgList,"fromhome"));
+        mViewPagerBanner.setAdapter(new BannerImageAdapter(mContext, bannerImgList, "fromhome"));
         listview_products.setAdapter(new HorizontalListAdapter(mContext, newArrivalDataList));
         listview_collections.setAdapter(new CollectionImageAdapter(mContext, colectionList));
-         mPageindicator.setViewPager(mViewPagerBanner);
+        mPageindicator.setViewPager(mViewPagerBanner);
         mPageindicator.setFillColor(getResources().getColor(R.color.maincolor));
         Runnable runnable = new Runnable() {
             @Override
@@ -472,6 +462,7 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
     SearchView searchView;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -511,11 +502,12 @@ public class HomeActivity extends AppCompatActivity implements
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
 
-        if(item.getItemId() == R.id.menu_chkout){
+        if (item.getItemId() == R.id.menu_chkout) {
             startActivity(new Intent(mContext, ShoppingCartActivity.class));
         }
 
@@ -614,9 +606,9 @@ public class HomeActivity extends AppCompatActivity implements
     private OnClickListener uploadPrescriptionHandler = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(mPreferenceData.isLogincheck()) {
+            if (mPreferenceData.isLogincheck()) {
                 startActivity(new Intent(mContext, UploadPrescriptionActivity.class));
-            }else{
+            } else {
                 showLoginDialog();
             }
         }
@@ -630,10 +622,10 @@ public class HomeActivity extends AppCompatActivity implements
         listview_products.setAdapter(new HorizontalListAdapter(mContext, newArrivalDataList));
         listview_collections.setAdapter(new CollectionImageAdapter(mContext, colectionList));
         invalidateOptionsMenu();
-        if(!mPreferenceData.getCartQuoteID().isEmpty()){
+        if (!mPreferenceData.getCartQuoteID().isEmpty()) {
 
             mNotifCount = Integer.parseInt(mPreferenceData.getCartItemCount());
-        }else{
+        } else {
             mNotifCount = 0;
         }
     }
@@ -643,7 +635,7 @@ public class HomeActivity extends AppCompatActivity implements
     private void displayCategoryData() {
         categoryMapData = GogglesManager.getInstance().getCategoryMap();
 
-        if(headerList != null){
+        if (headerList != null) {
             headerList.clear();
         }
         //Set<Integer> keys = categoryMapData.keySet();
@@ -688,7 +680,7 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
 
-    private void showLoginDialog(){
+    private void showLoginDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this)
                 .setTitle("Login")
                 .setMessage("Please login first to upload the prescription")

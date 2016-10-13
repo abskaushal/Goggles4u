@@ -88,7 +88,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         }
         TextView tv = (TextView) convertView.findViewById(R.id.lblListHeader);
-        tv.setText(headerTitle);
+        tv.setText(headerTitle.toUpperCase());
 
 
         return convertView;

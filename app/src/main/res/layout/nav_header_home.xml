@@ -11,90 +11,98 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/side_nav_bar"
+        android:background="@color/nav_bg_grey_dark"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_nav_profilename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:layout_marginTop="20dip"
-            android:padding="2dip"
+            android:layout_marginTop="30dip"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
             android:text="Hi Guest"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_nav_profileid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:padding="2dip"
-            android:text=""
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
 
         <LinearLayout
+            android:id="@+id/signin_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-
             android:orientation="horizontal"
-            android:padding="8dip">
+            android:padding="16dip">
 
-            <TextView
-                android:id="@+id/btn_login"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/sign_up"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/edtbg"
-                android:gravity="center"
-                android:padding="8dip"
-                android:text="Signin"
+                android:background="@drawable/nav_btn"
+                android:text="@string/sign_up"
                 android:textColor="@color/white"
-                android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/btn_signup"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dip"
-                android:layout_weight="1"
-                android:background="@drawable/edtbg"
-                android:gravity="center"
-                android:padding="8dip"
-                android:text="Sign Up"
-                android:textColor="@color/white"
+            <View
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:background="@color/transparent" />
 
-                android:textSize="12sp"
+            <Button
+                android:id="@+id/login"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/nav_btn"
+                android:text="@string/login"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/btn_logout"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dip"
-                android:layout_weight="1"
-                android:background="@color/gray"
-                android:gravity="center"
-                android:padding="8dip"
-                android:text="Logout"
-                android:textColor="@color/white"
-
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/logout_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="16dip"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/invite_friend"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/nav_btn"
+                android:text="@string/invite_friends"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:background="@color/transparent" />
+
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/nav_btn"
+                android:text="@string/logout"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/nav_bg_grey_light"
             android:gravity="center_vertical"
-            android:background="@color/white"
 
             android:orientation="horizontal"
             android:padding="8dip">
@@ -108,44 +116,38 @@
                 android:src="@drawable/ic_home_24dp" />
 
             <TextView
-                android:id="@+id/nav_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="24dip"
-                android:text="Home"
+                android:text="@string/home"
                 android:textColor="@color/deep_gray"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:background="@color/light_gray"></View>
     </LinearLayout>
-        <ExpandableListView
-            android:id="@+id/lvexp_categ"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:background="@color/white"
-            android:choiceMode="singleChoice"
-            android:dividerHeight="-1dip"
-            android:paddingBottom="4dip"></ExpandableListView>
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="48dip"
-            android:layout_marginLeft="15dip"
-            android:layout_gravity="center_horizontal"
-            style="?android:attr/progressBarStyleSmall"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@color/white"
-            android:id="@+id/progressBar_banner"/>
 
+    <ExpandableListView
+        android:id="@+id/lvexp_categ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="@color/white"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="-1dip"
+        android:paddingBottom="4dip"></ExpandableListView>
 
+    <ProgressBar
+        android:id="@+id/progressBar_banner"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="48dip"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="15dip"
+        android:background="@color/white" />
 
 
 </LinearLayout>
