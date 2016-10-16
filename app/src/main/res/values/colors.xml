@@ -79,4 +79,5 @@
     <!--Navigation Colors-->
     <color name="nav_bg_grey_dark">#EFEFEF</color>
     <color name="nav_bg_grey_light">#F8F8F8</color>
+    <color name="home_bg_grey">#E8E8E8</color>
 </resources>

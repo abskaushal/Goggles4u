@@ -13,9 +13,12 @@ import android.os.PersistableBundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.support.design.widget.NavigationView;
@@ -33,6 +36,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,6 +45,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ts.mobilelab.goggles4u.adapter.BannerImageAdapter;
+import com.ts.mobilelab.goggles4u.adapter.CollectionAdapter;
 import com.ts.mobilelab.goggles4u.adapter.CollectionImageAdapter;
 import com.ts.mobilelab.goggles4u.adapter.ExpandableListAdapter;
 import com.ts.mobilelab.goggles4u.adapter.HorizontalListAdapter;
@@ -77,6 +82,7 @@ public class HomeActivity extends AppCompatActivity implements
 
     private ImageView profileImg;
     private TextView userName;
+    private LinearLayout signInLinear, logoutLinear;
     private Button signUpBtn, loginBtn, logoutBtn, inviteFriendbtn;
     private LinearLayout menu_home, menu_myacnt, menu_contactus, menu_myorder, menu_helpcenter, menu_upload_prescription, menu_favlist;
     private ImageView imagereload;
@@ -104,9 +110,11 @@ public class HomeActivity extends AppCompatActivity implements
     int cartitemcount;
     private HashMap<String, ArrayList<ChildData>> categoryMapData;
 
-    HorizontalListView listview_products, listview_collections;
+    HorizontalListView listview_products;
+    ListView listview_collections;
 
     private View mFooterView;
+    public static final int RESULT_LOGIN = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +130,6 @@ public class HomeActivity extends AppCompatActivity implements
         //toolbar.setIcon(getResources().getDrawable(R.drawable.ic_actionbar_logo));
 
         imageLoader = ImageLoader.getInstance();
-        mViewPagerBanner = (ViewPager) findViewById(R.id.viewPager_home);
 
         bannerImgList = new ArrayList<>();
         colectionList = new ArrayList<CollectionImageData>();
@@ -130,11 +137,19 @@ public class HomeActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
 
-        listview_products = (HorizontalListView) findViewById(R.id.listview);
-        listview_collections = (HorizontalListView) findViewById(R.id.listview_collection);
-        mPageindicator = (CirclePageIndicator) findViewById(R.id.indicator);
-        homelt = (LinearLayout) findViewById(R.id.linearhome_header);
-        nwlt = (RelativeLayout) findViewById(R.id.reltive_nwlt);
+
+        listview_collections = (ListView) findViewById(R.id.listviewRecycler);
+
+
+        View homeHeaderView = LayoutInflater.from(this).inflate(R.layout.home_activity_header, listview_collections, false);
+        listview_collections.addHeaderView(homeHeaderView);
+
+        listview_products = (HorizontalListView) homeHeaderView.findViewById(R.id.listview);
+
+        mViewPagerBanner = (ViewPager) homeHeaderView.findViewById(R.id.viewPager_home);
+        mPageindicator = (CirclePageIndicator)  homeHeaderView.findViewById(R.id.indicator);
+        homelt = (LinearLayout)  homeHeaderView.findViewById(R.id.linearhome_header);
+        nwlt = (RelativeLayout)  findViewById(R.id.reltive_nwlt);
         imagereload = (ImageView) findViewById(R.id.imv_reload);
         //getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_home_24dp));
         bannerImgList = GogglesManager.getInstance().getBannerImgList();
@@ -176,6 +191,8 @@ public class HomeActivity extends AppCompatActivity implements
 
         //profileImg = (ImageView) headerView.findViewById(R.id.imv_nav_profile);
         userName = (TextView) headerView.findViewById(R.id.tv_nav_profilename);
+        signInLinear = (LinearLayout) headerView.findViewById(R.id.signin_linear);
+        logoutLinear = (LinearLayout) headerView.findViewById(R.id.logout_linear);
         signUpBtn = (Button) headerView.findViewById(R.id.sign_up);
         loginBtn = (Button) headerView.findViewById(R.id.login);
         logoutBtn = (Button) headerView.findViewById(R.id.logout);
@@ -199,10 +216,12 @@ public class HomeActivity extends AppCompatActivity implements
             mNotifCount = 0;
         }
 
+
         drawerexpandList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 // Log.v("getTag", childPosition + "" + v.getTag());
+                closeDrawer();
                 String f = (String) v.getTag();
 
                 startActivity(new Intent(mContext, ProductListingActivity.class).putExtra("cat_id", f).putExtra("fromintent", "category"));
@@ -230,7 +249,8 @@ public class HomeActivity extends AppCompatActivity implements
             @Override
 
             public void onClick(View v) {
-                startActivity(new Intent(mContext, Login.class));
+                closeDrawer();
+                startActivityForResult(new Intent(mContext, Login.class), RESULT_LOGIN);
             }
         });
         signUpBtn.setOnClickListener(new OnClickListener() {
@@ -250,9 +270,7 @@ public class HomeActivity extends AppCompatActivity implements
                 mPreferenceData.setCartQuoteID("");
                 mPreferenceData.setBillingAdrss("");
 
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                }
+                closeDrawer();
                 Toast.makeText(HomeActivity.this, "Successfully Logged out!", Toast.LENGTH_SHORT).show();
                 // startActivity(new Intent(mContext, Login.class));
                 //finish();
@@ -396,10 +414,13 @@ public class HomeActivity extends AppCompatActivity implements
 
 
             userName.setVisibility(View.VISIBLE);
+            logoutLinear.setVisibility(View.VISIBLE);
+            signInLinear.setVisibility(View.GONE);
             userName.setText("Hi" + " " + mPreferenceData.getCustomerFName());
 
         } else {
-
+            logoutLinear.setVisibility(View.GONE);
+            signInLinear.setVisibility(View.VISIBLE);
             userName.setText("Hi Guest");
 
         }
@@ -554,13 +575,14 @@ public class HomeActivity extends AppCompatActivity implements
     private OnClickListener homeListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(mContext, HomeActivity.class));
+            closeDrawer();
         }
     };
 
     private OnClickListener myacntListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            closeDrawer();
             if (mPreferenceData.isLogincheck()) {
                 startActivity(new Intent(mContext, MyAccountActivity.class));
             } else {
@@ -572,6 +594,7 @@ public class HomeActivity extends AppCompatActivity implements
     private OnClickListener myorderListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            closeDrawer();
             if (mPreferenceData.isLogincheck()) {
 
                 startActivity(new Intent(mContext, MyOrderActivity.class));
@@ -585,6 +608,7 @@ public class HomeActivity extends AppCompatActivity implements
     private OnClickListener fabListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            closeDrawer();
             startActivity(new Intent(mContext, FavListActivity.class));
         }
     };
@@ -592,6 +616,7 @@ public class HomeActivity extends AppCompatActivity implements
     private OnClickListener helpListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            closeDrawer();
             startActivity(new Intent(mContext, HelpCenterActivity.class));
         }
     };
@@ -599,6 +624,7 @@ public class HomeActivity extends AppCompatActivity implements
     private OnClickListener contactListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            closeDrawer();
             startActivity(new Intent(mContext, ContactUs.class));
         }
     };
@@ -606,6 +632,7 @@ public class HomeActivity extends AppCompatActivity implements
     private OnClickListener uploadPrescriptionHandler = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            closeDrawer();
             if (mPreferenceData.isLogincheck()) {
                 startActivity(new Intent(mContext, UploadPrescriptionActivity.class));
             } else {
@@ -693,5 +720,24 @@ public class HomeActivity extends AppCompatActivity implements
 
         Dialog dialog = builder.create();
         dialog.show();
+    }
+
+    /**
+     * Close the drawer if opened.
+     */
+    private void closeDrawer(){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOGIN) {
+                loginLogoutcheck();
+            }
+
     }
 }

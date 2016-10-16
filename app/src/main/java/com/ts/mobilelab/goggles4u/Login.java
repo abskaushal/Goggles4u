@@ -20,6 +20,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ts.mobilelab.goggles4u.apis.IWebService;
+import com.ts.mobilelab.goggles4u.apis.WebData;
+import com.ts.mobilelab.goggles4u.apis.WebServiceAsync;
 import com.ts.mobilelab.goggles4u.data.AppConstants;
 import com.ts.mobilelab.goggles4u.data.PreferenceData;
 import com.ts.mobilelab.goggles4u.logs.Logger;
@@ -28,7 +31,7 @@ import com.ts.mobilelab.goggles4u.net.GogglesAsynctask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements IWebService{
 
 
     private Context mContext;
@@ -82,7 +85,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               // startActivity(new Intent(sInstance.mContext,HomeActivity.class));
+                // startActivity(new Intent(sInstance.mContext,HomeActivity.class));
                 attemptLogin();
             }
         });
@@ -169,7 +172,7 @@ public class Login extends AppCompatActivity {
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
-           // focusView.requestFocus();
+            // focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
@@ -184,10 +187,8 @@ public class Login extends AppCompatActivity {
                 Logger.addRecordToLog("Login : " + e.getMessage());
             }
 
-            GogglesAsynctask gogglesAsynctask = new GogglesAsynctask(mContext, AppConstants.CODE_FOR_LOGIN);
-            gogglesAsynctask.execute(registerJson.toString());
-            //mAuthTask = new UserLoginTask(email, password);
-            //mAuthTask.execute((Void) null);
+            WebServiceAsync loginAsync = new WebServiceAsync(mContext,this,AppConstants.CODE_FOR_LOGIN);
+            loginAsync.execute(registerJson.toString());
         }
 
 
@@ -212,7 +213,7 @@ public class Login extends AppCompatActivity {
         //finish();
     }
 
-    public static void updateUi(String result) {
+    /*public static void updateUi(String result) {
 
         if(result.equals(AppConstants.SUCCESSFUL)){
             sInstance.mPreferenceData.setLogincheck(true);
@@ -225,15 +226,43 @@ public class Login extends AppCompatActivity {
                 sInstance.setResult(RESULT_OK);
                 sInstance.finish();
             }else{
-                sInstance.startActivity(new Intent(sInstance.mContext, HomeActivity.class));
+                //sInstance.startActivity(new Intent(sInstance.mContext, HomeActivity.class));
+              //  Intent intent=new Intent();
+              //  setResult(2,intent);
+              //  finish();
             }
 
 
         }else{
             Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
         }
+    }*/
+
+
+    @Override
+    public void onDataReceived(WebData data) {
+
+        if(data.getResult().equals(AppConstants.SUCCESSFUL)){
+            sInstance.mPreferenceData.setLogincheck(true);
+            Log.v("intentfrom", ""+sInstance.intentfrom);
+
+            if("prescriptionnext".equals(sInstance.intentfrom)){
+                sInstance.setResult(RESULT_OK);
+                sInstance.finish();
+            }else if("addtocart".equals(sInstance.intentfrom)){
+                sInstance.setResult(RESULT_OK);
+                sInstance.finish();
+            }else{
+                //sInstance.startActivity(new Intent(sInstance.mContext, HomeActivity.class));
+                Toast.makeText(sInstance, "" + "Login successful", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent();
+                setResult(HomeActivity.RESULT_LOGIN,intent);
+                finish();
+            }
+
+
+        }else {
+            Toast.makeText(sInstance, "" + data.getResult(), Toast.LENGTH_LONG).show();
+        }
     }
-
-
-
 }

@@ -29,7 +29,7 @@
             android:paddingLeft="24dip"
             android:text="@string/my_orders"
             android:textColor="@color/deep_gray"
-            android:textSize="16sp"
+            android:textSize="@dimen/drawer_text_size"
             android:textStyle="normal" />
 
     </LinearLayout>
@@ -57,7 +57,7 @@
             android:paddingLeft="24dip"
             android:text="@string/favorites"
             android:textColor="@color/deep_gray"
-            android:textSize="16sp"
+            android:textSize="@dimen/drawer_text_size"
             android:textStyle="normal" />
 
     </LinearLayout>
@@ -85,7 +85,7 @@
             android:paddingLeft="24dip"
             android:text="@string/upload_prescription"
             android:textColor="@color/deep_gray"
-            android:textSize="16sp"
+            android:textSize="@dimen/drawer_text_size"
             android:textStyle="normal" />
 
     </LinearLayout>
@@ -117,7 +117,7 @@
             android:minHeight="30dip"
             android:minWidth="30dip"
             android:padding="4dip"
-            android:src="@drawable/ic_person_24dp" />
+            android:src="@drawable/ic_nav_account_24dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -126,7 +126,7 @@
             android:paddingLeft="24dip"
             android:text="@string/my_account"
             android:textColor="@color/deep_gray"
-            android:textSize="16sp"
+            android:textSize="@dimen/drawer_text_size"
             android:textStyle="normal" />
 
     </LinearLayout>
@@ -154,7 +154,7 @@
             android:paddingLeft="24dip"
             android:text="@string/help_center"
             android:textColor="@color/deep_gray"
-            android:textSize="16sp"
+            android:textSize="@dimen/drawer_text_size"
             android:textStyle="normal" />
 
     </LinearLayout>
@@ -173,7 +173,7 @@
             android:minHeight="30dip"
             android:minWidth="30dip"
             android:padding="4dip"
-            android:src="@drawable/ic_live_help_24dp" />
+            android:src="@drawable/ic_nav_settings_24dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -182,7 +182,7 @@
             android:paddingLeft="24dip"
             android:text="@string/settings"
             android:textColor="@color/deep_gray"
-            android:textSize="16sp"
+            android:textSize="@dimen/drawer_text_size"
             android:textStyle="normal" />
 
     </LinearLayout>

@@ -706,7 +706,7 @@ int pageFlag = 0;
         } else if (mCheckcode == AppConstants.CODE_FOR_REGISTRATION) {
             RegistrationActivity.updateUi(result);
         } else if (mCheckcode == AppConstants.CODE_FOR_LOGIN) {
-            Login.updateUi(result);
+           // Login.updateUi(result);
         } else if (mCheckcode == AppConstants.CODE_FOR_FORGTPSWD) {
             ForGotPswdActivity.updateUi(result,receiveJSon);
         } else if (mCheckcode == AppConstants.CODE_FOR_CHANGEPSWD) {

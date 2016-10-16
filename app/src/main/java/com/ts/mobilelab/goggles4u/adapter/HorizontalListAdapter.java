@@ -99,6 +99,7 @@ public class HorizontalListAdapter extends BaseAdapter {
         viewHolder.productprice.setText(arrivalDataList.get(position).getFormated_price());
 
         ImageLoader.getInstance().displayImage(arrivalDataList.get(position).getProductimgurl(), viewHolder.productimg, options);
+
         return convertView;
     }
     static class ViewHolder{
