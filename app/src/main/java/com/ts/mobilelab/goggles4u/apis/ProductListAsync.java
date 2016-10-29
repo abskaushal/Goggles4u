@@ -13,11 +13,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Common AsyncTAsk class for calling different webservices.
- * <p/>
- * Created by Abhishek on 15-Oct-16.
+ * Created by Abhishek on 27-Oct-16.
  */
-public class WebServiceAsync extends AsyncTask<String, Void, Void> {
+public class ProductListAsync extends AsyncTask<String, Void, String> {
 
     private Context mContext;
     private IWebService mCallback;
@@ -27,37 +25,36 @@ public class WebServiceAsync extends AsyncTask<String, Void, Void> {
     private JSONObject receiveJSon, sendJsonobj;
     private ParseJsonData mParseJsonData;
     private String result = "";
+    private int mFlag;
 
+    public ProductListAsync(Context context, IWebService callback, int code, int flag) {
 
-    public WebServiceAsync(Context context, IWebService callback, int code) {
         if (context == null || callback == null) {
             throw new IllegalArgumentException("Null args passed");
         }
         mContext = context;
         mCallback = callback;
         mCode = code;
+        mFlag = flag;
         mHttpConnectionHelper = new HttpConnectionHelper(mContext);
         mProgressDialog = new ProgressDialog(mContext);
         mParseJsonData = new ParseJsonData(mContext);
-
     }
+
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
-            mProgressDialog = new ProgressDialog(mContext);
-            mProgressDialog.setMessage("Loading..");
-            mProgressDialog.setCancelable(false);
-
-
-        if (!(AppConstants.CODE_FOR_CATEGORY == mCode))
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setMessage("Loading..");
+        mProgressDialog.setCancelable(false);
+        if (mFlag == 0)
             mProgressDialog.show();
     }
 
 
     @Override
-    protected Void doInBackground(String... params) {
+    protected String doInBackground(String... params) {
         if (params.length != 0 && params[0] != null && !params[0].isEmpty()) {
             try {
                 sendJsonobj = new JSONObject(params[0]);
@@ -66,38 +63,43 @@ public class WebServiceAsync extends AsyncTask<String, Void, Void> {
             }
         }
         if (mHttpConnectionHelper.isNetworkAvailable()) {
-
-            if (mCode == AppConstants.CODE_FOR_LOGIN) {
-                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.USERLOGIN_URL, sendJsonobj);
+            if (mCode == AppConstants.CODE_FOR_PRODUCTLISTING) {
+                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.PRODUCT_LISTING, sendJsonobj);
                 if (receiveJSon != null) {
-                    String res = mParseJsonData.parseloginData(receiveJSon, mContext);
+                    String res = mParseJsonData.parseProductListingData(receiveJSon, mContext, mFlag);
                     result = res;
                 } else {
                     result = AppConstants.UNABLE_TO_PROCESS;
                 }
-            } else if (mCode == AppConstants.CODE_FOR_SORTOPTION) {
-                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.GETSORTOPTION_URL, sendJsonobj);
+            } else if (mCode == AppConstants.CODE_FOR_SORTOPTION_SUBMIT) {
+                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.PRODUCT_LISTING, sendJsonobj);
+                if (receiveJSon != null) {
+                    String res = mParseJsonData.parseProductListingData(receiveJSon, mContext, mFlag);
+                    result = res;
+                } else {
+                    result = AppConstants.UNABLE_TO_PROCESS;
+                }
+            } else if (mCode == AppConstants.CODE_FOR_FILTERDATA_SUBMIT) {
+                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.PRODUCT_LISTING, sendJsonobj);
                 if (receiveJSon != null) {
                     String res = mParseJsonData.parseJSONData(receiveJSon, mContext);
                     result = res;
                 } else {
                     result = AppConstants.UNABLE_TO_PROCESS;
                 }
-            } else if (mCode == AppConstants.CODE_FOR_HOME) {
-                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.HOME_DATA_URL, null);
+
+            } else if (mCode == AppConstants.CODE_FOR_MARKTOFAVRITE) {
+                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.MARKTOFAV_URL, sendJsonobj);
                 if (receiveJSon != null) {
-
-                    String res = mParseJsonData.parseHomeData(receiveJSon, mContext);
-
+                    String res = mParseJsonData.parseJSONData(receiveJSon, mContext);
                     result = res;
                 } else {
                     result = AppConstants.UNABLE_TO_PROCESS;
-
                 }
-            } else if (mCode == AppConstants.CODE_FOR_CATEGORY) {
-                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.CATEGORYLOAD_URL, sendJsonobj);
+            } else if (mCode == AppConstants.CODE_FOR_UNMARKTOFAVRITE) {
+                receiveJSon = mHttpConnectionHelper.getConnection(AppConstants.UNMARKTOFAV_URL, sendJsonobj);
                 if (receiveJSon != null) {
-                    String res = mParseJsonData.parsecategoryData(receiveJSon, mContext);
+                    String res = mParseJsonData.parseJSONData(receiveJSon, mContext);
                     result = res;
                 } else {
                     result = AppConstants.UNABLE_TO_PROCESS;
@@ -106,12 +108,14 @@ public class WebServiceAsync extends AsyncTask<String, Void, Void> {
         } else {
             result = AppConstants.NETWORK_NOT_AVAILABLE;
         }
-        return null;
+
+        return result;
     }
 
+
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
         try {
             if (mProgressDialog.isShowing()) {
                 mProgressDialog.cancel();
@@ -130,6 +134,4 @@ public class WebServiceAsync extends AsyncTask<String, Void, Void> {
         data.setCode(mCode);
         mCallback.onDataReceived(data);
     }
-
-
 }

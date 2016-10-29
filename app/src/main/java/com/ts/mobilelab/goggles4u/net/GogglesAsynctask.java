@@ -702,7 +702,7 @@ int pageFlag = 0;
         }
         if (mCheckcode == AppConstants.CODE_FOR_HOME) {
 
-            HomeActivity.updateUi(result,receiveJSon);
+           // HomeActivity.updateUi(result,receiveJSon);
         } else if (mCheckcode == AppConstants.CODE_FOR_REGISTRATION) {
             RegistrationActivity.updateUi(result);
         } else if (mCheckcode == AppConstants.CODE_FOR_LOGIN) {
@@ -736,20 +736,20 @@ int pageFlag = 0;
         } else if (mCheckcode == AppConstants.CODE_FOR_EDITINFO) {
             EditInformation.updateUi(result,sendJsonobj);
         }else if (mCheckcode == AppConstants.CODE_FOR_PRODUCTLISTING) {
-            ProductListingActivity.updateUi(result, receiveJSon);
+            //ProductListingActivity.updateUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_FILTERDATA){
           //  NewFilterActivity.updateUi(result, receiveJSon);
            // FilterActivity.parseJson(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_SORTOPTION){
             SortingActivity.updateSortDataUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_SORTOPTION_SUBMIT){
-            ProductListingActivity.updateSortData(result, receiveJSon);
+            //ProductListingActivity.updateSortData(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_PRODUCTDETAILS){
             ProductDetailsActivity.updateUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_LENSE_DETAILS){
             PrescriptionAddActivity.updateProductOptionUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_FILTERDATA_SUBMIT){
-            ProductListingActivity.updateFilterData(result, receiveJSon, pageFlag);
+            //ProductListingActivity.updateFilterData(result, receiveJSon, pageFlag);
         }else if(mCheckcode == AppConstants.CODE_FOR_GETPRESCRIPTION_LIST){
             PrescriptionAddActivity.updatePrescriptionListData(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_SAVEPRESCRIPTION){
@@ -757,9 +757,9 @@ int pageFlag = 0;
         }else if(mCheckcode == AppConstants.CODE_FOR_PRESCRIPTION_OPTION){
             PrescriptionAddActivity.updateProductOptionUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_CATEGORY){
-            HomeActivity.updateCategoryData(result);
+           // HomeActivity.updateCategoryData(result);
         }else if(mCheckcode == AppConstants.CODE_FOR_CATEGORYSELECTION){
-            HomeActivity.updateCategoryData(result);
+           // HomeActivity.updateCategoryData(result);
         }else if(mCheckcode == AppConstants.CODE_FOR_LENSEOPTIONS){
             PrescriptionAddActivity.updateLensData(result,receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_ADDTOCART){
@@ -801,9 +801,9 @@ int pageFlag = 0;
         }else if(mCheckcode == AppConstants.CODE_FOR_HELPCENTER){
             HelpCenterActivity.setUIData(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_MARKTOFAVRITE){
-            ProductListingActivity.updateMarkedData(result, receiveJSon, sendJsonobj);
+           // ProductListingActivity.updateMarkedData(result, receiveJSon, sendJsonobj);
         }else if(mCheckcode == AppConstants.CODE_FOR_UNMARKTOFAVRITE){
-            ProductListingActivity.updateMarkedData(result, receiveJSon,sendJsonobj);
+           // ProductListingActivity.updateMarkedData(result, receiveJSon,sendJsonobj);
         }else if(mCheckcode == AppConstants.CODE_FOR_FAVRITELIST){
             FavListActivity.updateUiData(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_DELETEFAVITEM){

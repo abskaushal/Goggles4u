@@ -84,7 +84,8 @@ public class SortingActivity extends AppCompatActivity {
                     in.putExtra("type", sInstance.type);
                     in.putExtra("sortoptions", sInstance.selectedOption);
                     sInstance.setResult(RESULT_OK, in);
-                    JSONObject sortdata = new JSONObject();
+                    JSONObject sortdata = new
+                            JSONObject();
                     try {
                         sortdata.put("selctoption",checkedRadioButtonId);
                         sortdata.put("type",sInstance.type);

@@ -1,12 +1,15 @@
 package com.ts.mobilelab.goggles4u;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,18 +18,28 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.paging.gridview.PagingGridView;
 
 import com.ts.mobilelab.goggles4u.adapter.SortGridAdapter;
+import com.ts.mobilelab.goggles4u.apis.IWebService;
+import com.ts.mobilelab.goggles4u.apis.ProductListAsync;
+import com.ts.mobilelab.goggles4u.apis.WebData;
+import com.ts.mobilelab.goggles4u.apis.WebServiceAsync;
 import com.ts.mobilelab.goggles4u.core.GogglesManager;
 import com.ts.mobilelab.goggles4u.data.AppConstants;
 import com.ts.mobilelab.goggles4u.data.PreferenceData;
 
 import com.ts.mobilelab.goggles4u.data.ProductData;
+import com.ts.mobilelab.goggles4u.data.SortData;
 import com.ts.mobilelab.goggles4u.net.NetAsyncTask;
 import com.ts.mobilelab.goggles4u.utils.PermissionUtils;
 
@@ -35,8 +48,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class ProductListingActivity extends AppCompatActivity {
+public class ProductListingActivity extends AppCompatActivity implements IWebService {
 
     private GridView gridView;
     private Context mContext;
@@ -44,26 +58,25 @@ public class ProductListingActivity extends AppCompatActivity {
 
     private ArrayList<ProductData> mProductList = new ArrayList<ProductData>();
     private TextView filter, sorting;
-    private TextView menview, womenView, kidsView;
-
-    private int mCurrentPage = 0;
-    private int mPreviousTotal = 0;
-    private boolean mLoading = true;
-    private boolean mLastPage = false;
-    private int  mPaginationenableFlag = 0;
+    private int mPaginationenableFlag = 0;
 
     private int mEachTimeItem = 14;
     private int mTotalitemCount = 0;
     private int pagercount = 1;
     View loadMoreView;
-    private static ProductListingActivity sInstance;
+   // private static ProductListingActivity sInstance;
     private PagingGridView gridViewPaging;
-    private JSONObject sortingJson;
     private PreferenceData mPreferenceData;
-    TextView notifCountView,emptyView;
+    private RelativeLayout filterRel, sortRel;
+    TextView notifCountView, emptyView;
     static int mNotifCount = 0;
 
+    private final int ASC_ID = 10;
+    private final int DESC_ID = 20;
     int searchflag = 0;
+
+    String selectedSortOptn, selectedType;
+    String filterData;
 
 
     String optionAry[];
@@ -94,7 +107,7 @@ public class ProductListingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_listing);
         mContext = this;
-        sInstance = this;
+       // sInstance = this;
         mPreferenceData = new PreferenceData();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -131,19 +144,22 @@ public class ProductListingActivity extends AppCompatActivity {
         }
 
 
-
         filter = (TextView) findViewById(R.id.tv_filter);
         sorting = (TextView) findViewById(R.id.tv_sort);
+        filterRel = (RelativeLayout) findViewById(R.id.filter_rel);
+        sortRel = (RelativeLayout) findViewById(R.id.sort_rel);
 
         filter.setOnClickListener(filterListener);
         sorting.setOnClickListener(sortingListener);
+        filterRel.setOnClickListener(filterListener);
+        sortRel.setOnClickListener(sortingListener);
         gridViewPaging.setHasMoreItems(true);
         handleIntent(getIntent());
         if (!mPreferenceData.getCartQuoteID().isEmpty()) {
 
 
             mNotifCount = Integer.parseInt(mPreferenceData.getCartItemCount());
-           // Log.v("mNotifCount", "1st" + mNotifCount);
+            // Log.v("mNotifCount", "1st" + mNotifCount);
         } else {
             mNotifCount = 0;
         }
@@ -152,7 +168,7 @@ public class ProductListingActivity extends AppCompatActivity {
             gridViewPaging.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                 @Override
                 public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                    Log.v("scrolling","");
+                    Log.v("scrolling", "");
                 }
             });
         }
@@ -160,14 +176,15 @@ public class ProductListingActivity extends AppCompatActivity {
             @Override
             public void onLoadMoreItems() {
                 Log.v("onLoadMoreItems pagercount", pagercount + "mTotalitemCount" + mTotalitemCount);
-                 Log.v("flag",""+flag);
+                Log.v("flag", "" + flag);
 
                 if (flag == 1) { //for product listing
 
                     if (pagercount < mTotalitemCount) {
 
 
-                        NetAsyncTask nAsynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_PRODUCTLISTING, 1);
+                        //NetAsyncTask nAsynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_PRODUCTLISTING, 1);
+                        ProductListAsync nAsynctask = new ProductListAsync(mContext, ProductListingActivity.this, AppConstants.CODE_FOR_PRODUCTLISTING, 1);
                         JSONObject productjson = new JSONObject();
 
                         try {
@@ -231,8 +248,6 @@ public class ProductListingActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
     @Override
@@ -248,17 +263,16 @@ public class ProductListingActivity extends AppCompatActivity {
 
     }
 
-    String query  = null;
+    String query = null;
 
     private void handleIntent(Intent intent) {
-
 
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             query = intent.getStringExtra(SearchManager.QUERY);
 
             getSupportActionBar().setTitle(query);
-            if(searchView != null) {
+            if (searchView != null) {
                 searchView.setQueryHint(query);
             }
             searchflag++;
@@ -271,7 +285,8 @@ public class ProductListingActivity extends AppCompatActivity {
 
     private void sendResulttotServer(String query) {  //for search query
 
-        NetAsyncTask gosynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_SORTOPTION_SUBMIT,mPaginationenableFlag);
+        //NetAsyncTask gosynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_SORTOPTION_SUBMIT, mPaginationenableFlag);
+        ProductListAsync gosynctask = new ProductListAsync(mContext,ProductListingActivity.this,AppConstants.CODE_FOR_SORTOPTION_SUBMIT, mPaginationenableFlag );
         JSONObject productjson = new JSONObject();
         //{"cat_id":18,"p":1,"c":15,"sort":"price","dir":"asc"}
         try {
@@ -299,7 +314,9 @@ public class ProductListingActivity extends AppCompatActivity {
 
     private void init() {
 
-        NetAsyncTask gsAsynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_PRODUCTLISTING,mPaginationenableFlag);
+        //NetAsyncTask gsAsynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_PRODUCTLISTING, mPaginationenableFlag);
+
+        ProductListAsync productListAsync = new ProductListAsync(mContext, ProductListingActivity.this, AppConstants.CODE_FOR_PRODUCTLISTING, mPaginationenableFlag);
         JSONObject productjson = new JSONObject();
         //{"cat_id":18,"p":1,"c":15,"sort":"price","dir":"asc"}
         try {
@@ -325,14 +342,14 @@ public class ProductListingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        gsAsynctask.execute(productjson.toString());
+        productListAsync.execute(productjson.toString());
     }
 
 
     private View.OnClickListener filterListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-           // startActivityForResult(new Intent(mContext, NewFilterActivity.class).putExtra("cat_id", categoryId), 111);
+            // startActivityForResult(new Intent(mContext, NewFilterActivity.class).putExtra("cat_id", categoryId), 111);
             startActivityForResult(new Intent(mContext, FilterActivity.class).putExtra("cat_id", categoryId), 111);
         }
     };
@@ -343,33 +360,35 @@ public class ProductListingActivity extends AppCompatActivity {
             GogglesManager.getInstance().getProductDataArrayList().clear();
 
 
-            startActivityForResult(new Intent(mContext, SortingActivity.class), AppConstants.CODE_FOR_SORTINGCLASS);
+            WebServiceAsync webServiceAsync = new WebServiceAsync(ProductListingActivity.this, ProductListingActivity.this, AppConstants.CODE_FOR_SORTOPTION);
+            webServiceAsync.execute();
+            //startActivityForResult(new Intent(mContext, SortingActivity.class), AppConstants.CODE_FOR_SORTINGCLASS);
 
 
         }
     };
 
 
-
     private void displayData() {
 
         mProductList = GogglesManager.getInstance().getProductDataArrayList();
-        Log.v("mProductList","displayData"+mProductList.size());
-        Log.v("mSortGridAdapter","outsideside"+mSortGridAdapter);
+        Log.v("mProductList", "displayData" + mProductList.size());
+        Log.v("mSortGridAdapter", "outsideside" + mSortGridAdapter);
         if (mSortGridAdapter == null) {
-            Log.v("mSortGridAdapter","inside"+mSortGridAdapter);
+            Log.v("mSortGridAdapter", "inside" + mSortGridAdapter);
             mSortGridAdapter = new SortGridAdapter(mContext, mProductList);
-            gridViewPaging.invalidateViews();
-            mSortGridAdapter.notifyDataSetChanged();
+            //gridViewPaging.invalidateViews();
+            //mSortGridAdapter.notifyDataSetChanged();
             gridViewPaging.setAdapter(mSortGridAdapter);
             //mSortGridAdapter.refresh(mProductList);
 
-        }else{
+        } else {
             gridViewPaging.onFinishLoading(true, mProductList);
         }
     }
 
     SearchView searchView;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -385,22 +404,16 @@ public class ProductListingActivity extends AppCompatActivity {
             }
         });
         //
-        final MenuItem myActionMenuItem = menu.findItem( R.id.menu_search);
+        final MenuItem myActionMenuItem = menu.findItem(R.id.menu_search);
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        MenuItemCompat.setActionView(myActionMenuItem,searchView);
+        MenuItemCompat.setActionView(myActionMenuItem, searchView);
         searchView.setQueryHint(query);
         //finish();
         return true;
     }
-
-
-
-
-
-
 
 
     public void updateHotCount(final int new_hot_number) {
@@ -420,18 +433,135 @@ public class ProductListingActivity extends AppCompatActivity {
         });
     }
 
+    private void showSortDialog(final ArrayList<SortData> optionList, String type) {
+
+        final Dialog dialog = new Dialog(mContext);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.sort_dialog);
+
+        final RadioGroup sortOptRg = (RadioGroup) dialog.findViewById(R.id.rg_sortopt);
+        final RadioGroup sortTypesRg = (RadioGroup) dialog.findViewById(R.id.radioGroup_sort);
+
+        Button doneBtn = (Button) dialog.findViewById(R.id.done);
+        Button cancelBtn = (Button) dialog.findViewById(R.id.cancel);
+
+
+        RadioButton ascRb = new RadioButton(mContext);
+        ascRb.setId(ASC_ID);
+        ascRb.setText("Ascending");
+        sortTypesRg.addView(ascRb);
+
+        RadioButton descRb = new RadioButton(mContext);
+        descRb.setText("Descending");
+        descRb.setId(DESC_ID);
+        sortTypesRg.addView(descRb);
+
+        if (type.equals("asc")) {
+            ascRb.setChecked(true);
+            descRb.setChecked(false);
+        } else {
+            ascRb.setChecked(false);
+            descRb.setChecked(true);
+        }
+
+        for (int i = 0; i < optionList.size(); i++) {
+            RadioButton rb = new RadioButton(mContext); // dynamically creating RadioButton and adding to RadioGroup.
+            rb.setId(i);
+            rb.setText(optionList.get(i).value);
+            rb.setChecked(optionList.get(i).selected);
+            sortOptRg.addView(rb);
+        }
+
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int sortId = sortOptRg.getCheckedRadioButtonId();
+                int sortTypeId = sortTypesRg.getCheckedRadioButtonId();
+
+                String sortType = (sortTypeId == ASC_ID ? "asc" : "desc");
+                JSONObject sortdata = new JSONObject();
+                try {
+                    sortdata.put("selctoption", sortId);
+                    sortdata.put("type", sortType);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mPreferenceData.setSELECTED_SORT_OPTION(sortdata.toString());
+
+                dialog.dismiss();
+                pagercount = 1;
+                mPaginationenableFlag = 0;
+                selectedType = sortType;
+                selectedSortOptn = optionList.get(sortId).key;
+                sortingServercall(0);
+                flag = 3;
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    private void showSortOptions(JSONObject receiveJSon) {
+
+
+        int selectid = 0;
+        String type = "asc";
+        ArrayList<SortData> optionList = new ArrayList<>();
+        ;
+        try {
+            String saveoption = mPreferenceData.getSELECTED_SORT_OPTION();
+            if (!saveoption.isEmpty()) {
+                JSONObject savejson = new JSONObject(saveoption);
+                selectid = savejson.getInt("selctoption");
+                type = savejson.getString("type");
+            }
+            JSONObject datajson = receiveJSon.getJSONObject("data");
+            Log.v("datajson", "" + datajson);
+
+            Iterator<?> iterator = datajson.keys();
+            SortData data;
+            int id = 0;
+            while (iterator.hasNext()) {
+                data = new SortData();
+                data.key = (String) iterator.next();
+                data.value = datajson.getString(data.key);
+                if (id == selectid)
+                    data.selected = true;
+                else
+                    data.selected = false;
+                id++;
+                optionList.add(data);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        showSortDialog(optionList, type);
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-       // Log.v("from filter resultCode", resultCode + "requestCode" + requestCode);
+        // Log.v("from filter resultCode", resultCode + "requestCode" + requestCode);
         // GridAdapter mGridAdapter = new GridAdapter(mContext,null);
         pagercount = 1;
         mPaginationenableFlag = 0;
 
 
-
         if (requestCode == AppConstants.CODE_FOR_SORTINGCLASS) { //"from sorting
             Log.v("from sorting", "onActivi");
             // displayData();
+
             if (resultCode == RESULT_OK) {
 
                 //gridViewPaging.invalidateViews();
@@ -477,7 +607,7 @@ public class ProductListingActivity extends AppCompatActivity {
             }else{
                 filtrjson.put("mPaginationenableFlag", 0);
             }*/
-            if(query != null && !query.isEmpty()){
+            if (query != null && !query.isEmpty()) {
                 filtrjson.put("searchkey", query);
             }
 
@@ -492,8 +622,10 @@ public class ProductListingActivity extends AppCompatActivity {
             //sortjson.put("sortkey", selctoptionsList);
 
             Log.v("filtrjson", "" + filtrjson);
-          //  GogglesAsynctask gogglesAsynctask = new GogglesAsynctask(mContext, AppConstants.CODE_FOR_FILTERDATA_SUBMIT);
-            NetAsyncTask gAsynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_FILTERDATA_SUBMIT,mPaginationenableFlag);
+            //  GogglesAsynctask gogglesAsynctask = new GogglesAsynctask(mContext, AppConstants.CODE_FOR_FILTERDATA_SUBMIT);
+           // NetAsyncTask gAsynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_FILTERDATA_SUBMIT, mPaginationenableFlag);
+
+            ProductListAsync gAsynctask = new ProductListAsync(mContext,ProductListingActivity.this,AppConstants.CODE_FOR_FILTERDATA_SUBMIT, mPaginationenableFlag);
             gAsynctask.execute(filtrjson.toString());
 
         } catch (JSONException e) {
@@ -512,7 +644,7 @@ public class ProductListingActivity extends AppCompatActivity {
             sortjson.put("sort", selectedSortOptn);
             sortjson.put("dir", selectedType);
 
-            if(query != null && !query.isEmpty()){
+            if (query != null && !query.isEmpty()) {
                 sortjson.put("searchkey", query);
             }
 
@@ -530,31 +662,28 @@ public class ProductListingActivity extends AppCompatActivity {
         }
 
 
-        NetAsyncTask ssynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_SORTOPTION_SUBMIT,i);
+       // NetAsyncTask ssynctask = new NetAsyncTask(mContext, AppConstants.CODE_FOR_SORTOPTION_SUBMIT, i);
+        ProductListAsync ssynctask = new ProductListAsync(mContext,ProductListingActivity.this,AppConstants.CODE_FOR_SORTOPTION_SUBMIT, i);
         ssynctask.execute(sortjson.toString());
     }
 
 
-    String selectedSortOptn, selectedType;
-    String filterData;
 
-    public static void updateUi(String result, JSONObject receiveJSon) {
+    public void updateUi(String result, JSONObject receiveJSon) {
 
         if (result.equals(AppConstants.SUCCESSFUL)) {
             try {
-                sInstance.mTotalitemCount = Integer.parseInt(receiveJSon.getString("page_count"));
-                Log.v("updateUi", "mTotalitemCount" + sInstance.mTotalitemCount);
-                sInstance.getSupportActionBar().setTitle(receiveJSon.getString("cat_name"));
+                mTotalitemCount = Integer.parseInt(receiveJSon.getString("page_count"));
+                getSupportActionBar().setTitle(receiveJSon.getString("cat_name"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            sInstance.flag = 1;
-            sInstance.pagercount =  sInstance.pagercount + 1;
-            sInstance.displayData();
+            flag = 1;
+            pagercount = pagercount + 1;
+            displayData();
 
         } else {
-            Log.v("Error msg","in prodlist"+result);
-            Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "" + result, Toast.LENGTH_LONG).show();
         }
 
 
@@ -620,13 +749,13 @@ public class ProductListingActivity extends AppCompatActivity {
             //Log.v("displaySortingData", "out" + mGridAdapterSort);
           /*  mGridAdapterSort = new SortGridAdapter(mContext, mProductList);
             gridViewPaging.setAdapter(mGridAdapterSort);*/
-          if (mGridAdapterSort == null) {
-                Log.v("displaySortingData","in"+mGridAdapterSort);
+            if (mGridAdapterSort == null) {
+                Log.v("displaySortingData", "in" + mGridAdapterSort);
                 mGridAdapterSort = new SortGridAdapter(mContext, mProductList);
                 gridViewPaging.setAdapter(mGridAdapterSort);
 
             } else {
-              Log.v("displaySortingData","not"+mGridAdapterSort);
+                Log.v("displaySortingData", "not" + mGridAdapterSort);
                 gridViewPaging.onFinishLoading(true, mProductList);
             }
 
@@ -636,48 +765,47 @@ public class ProductListingActivity extends AppCompatActivity {
     }
 
 
-    public static void updateSortData(String result, JSONObject receiveJSon) {  //sorting response
+    public void updateSortData(String result, JSONObject receiveJSon) {  //sorting response
         if (result.equals(AppConstants.SUCCESSFUL)) {
-            sInstance.flag = 3; //for sorting 3
-           // Log.v("pagercount",""+sInstance.pagercount);
-            sInstance.pagercount =  sInstance.pagercount + 1;
+            flag = 3; //for sorting 3
+            // Log.v("pagercount",""+sInstance.pagercount);
+            pagercount = pagercount + 1;
             //Log.v("pagercount",""+sInstance.pagercount);
             try {
-                sInstance.getSupportActionBar().setTitle(receiveJSon.getString("cat_name"));
+                getSupportActionBar().setTitle(receiveJSon.getString("cat_name"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            sInstance.displaySortingData(receiveJSon);
-
+            displaySortingData(receiveJSon);
 
 
         } else {
-            View empty = sInstance.gridViewPaging.getEmptyView();
+            View empty = gridViewPaging.getEmptyView();
             TextView ev = (TextView) empty.findViewById(R.id.empty);
             ev.setText(result);
             //Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
         }
     }
 
-    public static void updateFilterData(String result, JSONObject receiveJSon, int pageFlag) {
+    public  void updateFilterData(String result, JSONObject receiveJSon) {
         if (result.equals(AppConstants.SUCCESSFUL)) {
-            sInstance.flag = 2; //for filter 2
-            sInstance.pagercount++;
-            sInstance.displaySortingData(receiveJSon);
+            flag = 2; //for filter 2
+            pagercount++;
+            displaySortingData(receiveJSon);
         } else {
-            Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "" + result, Toast.LENGTH_LONG).show();
         }
     }
 
-    public static void updateMarkedData(String result, JSONObject receiveJSon, JSONObject sendJSon) {
+    public void updateMarkedData(String result, JSONObject sendJSon) {
         if (result.equals(AppConstants.SUCCESSFUL)) {
 
-            sInstance.setFavrData(sendJSon);
-            Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
+            setFavrData(sendJSon);
+            Toast.makeText(mContext, "" + result, Toast.LENGTH_LONG).show();
 
 
         } else {
-            Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "" + result, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -700,6 +828,25 @@ public class ProductListingActivity extends AppCompatActivity {
 
         if (mSortGridAdapter != null) {
             mSortGridAdapter.refresh(mProductList);
+        }
+    }
+
+    @Override
+    public void onDataReceived(WebData data) {
+        if (data.getCode() == AppConstants.CODE_FOR_SORTOPTION) {
+            if (data.getResult().equals(AppConstants.SUCCESSFUL)) {
+                showSortOptions(data.getReceiveJson());
+            }
+        }else if(data.getCode() == AppConstants.CODE_FOR_PRODUCTLISTING){
+            updateUi(data.getResult(), data.getReceiveJson());
+        }else if (data.getCode() == AppConstants.CODE_FOR_SORTOPTION_SUBMIT){
+            updateSortData(data.getResult(), data.getReceiveJson());
+        }else if (data.getCode() == AppConstants.CODE_FOR_FILTERDATA_SUBMIT){
+            updateFilterData(data.getResult(), data.getReceiveJson());
+        }else if(data.getCode() == AppConstants.CODE_FOR_MARKTOFAVRITE){
+            updateMarkedData(data.getResult(),data.getSendJson());
+        }else if(data.getCode() == AppConstants.CODE_FOR_UNMARKTOFAVRITE){
+            updateMarkedData(data.getResult(),data.getSendJson());
         }
     }
 }

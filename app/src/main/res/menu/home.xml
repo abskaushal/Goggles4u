@@ -14,7 +14,7 @@
     <item
         android:id="@+id/menu_chkout"
         app:actionLayout="@layout/bedge_menu"
-        android:icon="@drawable/ic_shopping_cart_white_24dp1"
+        android:icon="@drawable/ic_shopping_cart_white"
         app:showAsAction="always"
         android:title="cart"></item>
 

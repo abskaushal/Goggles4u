@@ -39,17 +39,16 @@ public class HorizontalListAdapter extends BaseAdapter {
     private ArrayList<NewArrivalData> arrivalDataList;
     private Context context;
     private DisplayImageOptions options;
-    //private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
     public HorizontalListAdapter(Context mContext, ArrayList<NewArrivalData> newArrivalDataList) {
-       this.arrivalDataList = newArrivalDataList;
+        this.arrivalDataList = newArrivalDataList;
         this.context = mContext;
         options = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.drawable.ic_menu_gallery)
                 .showImageOnFail(R.drawable.glass)
                 .resetViewBeforeLoading(true)
                 .cacheOnDisk(true)
-					/*.imageScaleType(ImageScaleType.Fit)*/
+                    /*.imageScaleType(ImageScaleType.Fit)*/
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .considerExifParams(true)
                 .displayer(new FadeInBitmapDisplayer(300))
@@ -78,50 +77,30 @@ public class HorizontalListAdapter extends BaseAdapter {
         View view = convertView;
         final ViewHolder viewHolder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.newarrival_listitem, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.productimg = (ImageView) convertView.findViewById(R.id.imv_newarrivalitem);
             viewHolder.productName = (TextView) convertView.findViewById(R.id.tv_newarrival);
             viewHolder.productprice = (TextView) convertView.findViewById(R.id.tv_newarrivalprice);
-           // viewHolder.spinner = (ProgressBar) convertView.findViewById(R.id.progressBar_banner);
-
             convertView.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
 
         }
         viewHolder.productName.setText(arrivalDataList.get(position).getProductname());
         viewHolder.productimg.setTag(arrivalDataList.get(position).getProductId());
-        //DecimalFormat df = new DecimalFormat("#.00");
-        //viewHolder.productprice.setText("$"+df.format(Double.parseDouble(arrivalDataList.get(position).getProductprice())));
         viewHolder.productprice.setText(arrivalDataList.get(position).getFormated_price());
 
         ImageLoader.getInstance().displayImage(arrivalDataList.get(position).getProductimgurl(), viewHolder.productimg, options);
 
         return convertView;
     }
-    static class ViewHolder{
+
+    static class ViewHolder {
         ImageView productimg;
-        TextView productName,productprice;
-         ProgressBar spinner;
+        TextView productName, productprice;
+        ProgressBar spinner;
     }
-
-    /*private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
-
-        static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
-
-        @Override
-        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-            if (loadedImage != null) {
-                ImageView imageView = (ImageView) view;
-                boolean firstDisplay = !displayedImages.contains(imageUri);
-                if (firstDisplay) {
-                    FadeInBitmapDisplayer.animate(imageView, 500);
-                    displayedImages.add(imageUri);
-                }
-            }
-        }
-    }*/
 }

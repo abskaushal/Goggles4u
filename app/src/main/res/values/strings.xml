@@ -177,5 +177,6 @@
     <string name="my_account">MY ACCOUNT</string>
     <string name="help_center">HELP CENTER</string>
     <string name="settings">SETTINGS</string>
+    <string name="sort_by">SORT BY</string>
 
 </resources>

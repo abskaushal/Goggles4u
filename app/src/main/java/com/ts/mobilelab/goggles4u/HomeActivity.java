@@ -49,6 +49,9 @@ import com.ts.mobilelab.goggles4u.adapter.CollectionAdapter;
 import com.ts.mobilelab.goggles4u.adapter.CollectionImageAdapter;
 import com.ts.mobilelab.goggles4u.adapter.ExpandableListAdapter;
 import com.ts.mobilelab.goggles4u.adapter.HorizontalListAdapter;
+import com.ts.mobilelab.goggles4u.apis.IWebService;
+import com.ts.mobilelab.goggles4u.apis.WebData;
+import com.ts.mobilelab.goggles4u.apis.WebServiceAsync;
 import com.ts.mobilelab.goggles4u.core.GogglesManager;
 import com.ts.mobilelab.goggles4u.data.AppConstants;
 import com.ts.mobilelab.goggles4u.data.ChildData;
@@ -73,23 +76,15 @@ import java.util.Map;
 
 
 public class HomeActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener
-        // implements NavigationView.OnNavigationItemSelectedListener
-{
-    private ImageLoader imageLoader;
+        NavigationView.OnNavigationItemSelectedListener, IWebService {
     private ViewPager mViewPagerBanner;
-    private ViewPagerAdapter mViewpagerAdater;
-
-    private ImageView profileImg;
     private TextView userName;
     private LinearLayout signInLinear, logoutLinear;
     private Button signUpBtn, loginBtn, logoutBtn, inviteFriendbtn;
     private LinearLayout menu_home, menu_myacnt, menu_contactus, menu_myorder, menu_helpcenter, menu_upload_prescription, menu_favlist;
     private ImageView imagereload;
     private Context mContext;
-    private PagerAdapter mAdapter;
     private static final String STATE_POSITION = "STATE_POSITION";
-    private HorizontalListAdapter mHorizontalListAdapter;
     private ArrayList<NewArrivalData> newArrivalDataList;
     private ArrayList<String> bannerImgList;
     private CirclePageIndicator mPageindicator;
@@ -99,15 +94,12 @@ public class HomeActivity extends AppCompatActivity implements
     static int i = 0;
     private Handler mHandler;
     private ExpandableListView drawerexpandList;
-    private HashMap<String, List<String>> listDataChild;
     private ExpandableListAdapter expandlistAdapter;
-    private List<String> listDataHeader;
     private LinearLayout homelt;
     private RelativeLayout nwlt;
     private ProgressBar mProgresbar;
     private TextView notifCountView;
     private static int mNotifCount = 0;
-    int cartitemcount;
     private HashMap<String, ArrayList<ChildData>> categoryMapData;
 
     HorizontalListView listview_products;
@@ -115,65 +107,70 @@ public class HomeActivity extends AppCompatActivity implements
 
     private View mFooterView;
     public static final int RESULT_LOGIN = 100;
+    private JSONObject homejson;
+    private String cachflagserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mContext = this;
-        sInstance = this;
+        bannerImgList = new ArrayList<>();
+        newArrivalDataList = new ArrayList<>();
+        colectionList = new ArrayList<>();
         mPreferenceData = new PreferenceData();
         if (Build.VERSION.SDK_INT >= 23)
             PermissionUtils.verifyPermissions(HomeActivity.this);
+
+
+        initUi();
+        setUpNavigationDrawer();
+        setListeners();
+        getHomeData();
+
+        if (!mPreferenceData.getCartQuoteID().isEmpty()) {
+            mNotifCount = Integer.parseInt(mPreferenceData.getCartItemCount());
+        } else {
+            mNotifCount = 0;
+        }
+
+    }
+
+
+    /**
+     * Initialize the UI widgets.
+     */
+    private void initUi() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         toolbar.setLogo(R.drawable.ic_actionbar_logo);
-        //toolbar.setIcon(getResources().getDrawable(R.drawable.ic_actionbar_logo));
-
-        imageLoader = ImageLoader.getInstance();
-
         bannerImgList = new ArrayList<>();
         colectionList = new ArrayList<CollectionImageData>();
         mHandler = new Handler();
-        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
 
 
         listview_collections = (ListView) findViewById(R.id.listviewRecycler);
-
-
         View homeHeaderView = LayoutInflater.from(this).inflate(R.layout.home_activity_header, listview_collections, false);
         listview_collections.addHeaderView(homeHeaderView);
-
         listview_products = (HorizontalListView) homeHeaderView.findViewById(R.id.listview);
-
         mViewPagerBanner = (ViewPager) homeHeaderView.findViewById(R.id.viewPager_home);
-        mPageindicator = (CirclePageIndicator)  homeHeaderView.findViewById(R.id.indicator);
-        homelt = (LinearLayout)  homeHeaderView.findViewById(R.id.linearhome_header);
-        nwlt = (RelativeLayout)  findViewById(R.id.reltive_nwlt);
+        mPageindicator = (CirclePageIndicator) homeHeaderView.findViewById(R.id.indicator);
+        homelt = (LinearLayout) homeHeaderView.findViewById(R.id.linearhome_header);
+        nwlt = (RelativeLayout) findViewById(R.id.reltive_nwlt);
         imagereload = (ImageView) findViewById(R.id.imv_reload);
-        //getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_home_24dp));
-        bannerImgList = GogglesManager.getInstance().getBannerImgList();
-        newArrivalDataList = GogglesManager.getInstance().getNewArrivalDataList();
-        colectionList = GogglesManager.getInstance().getImageDataList();
-        Log.v("bannerImgList ndata", newArrivalDataList.size() + "rr" + bannerImgList.size());
-        if (bannerImgList.size() == 0 || newArrivalDataList.size() == 0) {
-            init();
-        } else {
-            sInstance.homelt.setVisibility(View.VISIBLE);
-            showHomeData();
-            //mViewPagerBanner.setAdapter(new BannerImageAdapter(mContext, bannerImgList, "fromhome"));
-            //listview_products.setAdapter(new HorizontalListAdapter(mContext, newArrivalDataList));
-            //listview_collections.setAdapter(new CollectionImageAdapter(mContext, colectionList));
-        }
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         drawer.setDrawerListener(mDrawerListener);
         toggle.syncState();
+    }
 
-
+    /**
+     * Set up the navigation drawer.
+     */
+    private void setUpNavigationDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -189,7 +186,6 @@ public class HomeActivity extends AppCompatActivity implements
         // Log.v("device_id", "" + device_id);
         mPreferenceData.setDEVICE_ID(device_id);
 
-        //profileImg = (ImageView) headerView.findViewById(R.id.imv_nav_profile);
         userName = (TextView) headerView.findViewById(R.id.tv_nav_profilename);
         signInLinear = (LinearLayout) headerView.findViewById(R.id.signin_linear);
         logoutLinear = (LinearLayout) headerView.findViewById(R.id.logout_linear);
@@ -202,33 +198,6 @@ public class HomeActivity extends AppCompatActivity implements
         mFooterView = View.inflate(HomeActivity.this, R.layout.home_menu_view, null);
         drawerexpandList.addFooterView(mFooterView);
 
-        // Log.v("cartid", "ww" + mPreferenceData.getCartQuoteID());
-        //Log.v("itm count", "ww" + mPreferenceData.getCartItemCount());
-        if (!mPreferenceData.getCartQuoteID().isEmpty()) {
-
-            //cartitemcount = 2;
-            //tv.setText(""+mPreferenceData.getCartItemCount());
-            //supportInvalidateOptionsMenu();
-            // Log.v("pref",""+mPreferenceData.getCartItemCount());
-            mNotifCount = Integer.parseInt(mPreferenceData.getCartItemCount());
-            //Log.v("mNotifCount","1st"+mNotifCount);
-        } else {
-            mNotifCount = 0;
-        }
-
-
-        drawerexpandList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                // Log.v("getTag", childPosition + "" + v.getTag());
-                closeDrawer();
-                String f = (String) v.getTag();
-
-                startActivity(new Intent(mContext, ProductListingActivity.class).putExtra("cat_id", f).putExtra("fromintent", "category"));
-
-                return true;
-            }
-        });
         menu_home = (LinearLayout) headerView.findViewById(R.id.nav_home);
         menu_myacnt = (LinearLayout) mFooterView.findViewById(R.id.nav_my_account);
         menu_myorder = (LinearLayout) mFooterView.findViewById(R.id.nav_myorder);
@@ -243,7 +212,25 @@ public class HomeActivity extends AppCompatActivity implements
         menu_favlist.setOnClickListener(fabListener);
         menu_helpcenter.setOnClickListener(helpListener);
         menu_upload_prescription.setOnClickListener(uploadPrescriptionHandler);
-//        menu_contactus.setOnClickListener(contactListener);
+
+    }
+
+
+    /**
+     * Set the listeners on buttons and widgets
+     */
+    private void setListeners() {
+        drawerexpandList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                closeDrawer();
+                String f = (String) v.getTag();
+
+                startActivity(new Intent(mContext, ProductListingActivity.class).putExtra("cat_id", f).putExtra("fromintent", "category"));
+
+                return true;
+            }
+        });
 
         loginBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -272,8 +259,6 @@ public class HomeActivity extends AppCompatActivity implements
 
                 closeDrawer();
                 Toast.makeText(HomeActivity.this, "Successfully Logged out!", Toast.LENGTH_SHORT).show();
-                // startActivity(new Intent(mContext, Login.class));
-                //finish();
                 loginLogoutcheck();
 
             }
@@ -286,31 +271,23 @@ public class HomeActivity extends AppCompatActivity implements
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String skuid = newArrivalDataList.get(position).getProductSku();
-                // Log.v("skuid",""+skuid);
-
                 startActivity(new Intent(mContext, ProductDetailsActivity.class).putExtra("skuid", skuid));
-                //.putExtra("fromintent","home"));
             }
         });
         imagereload.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                init();
+                getHomeData();
             }
         });
-
-        int pagerPosition = savedInstanceState == null ? 0 : savedInstanceState.getInt(STATE_POSITION);
-
     }
 
-    JSONObject homejson;
 
     private void setCategoryData(JSONObject receiveJSon) {
         homejson = receiveJSon;
 
     }
 
-    String cachflagserver;
     private DrawerLayout.DrawerListener mDrawerListener = new DrawerLayout.DrawerListener() {
 
         @Override
@@ -325,23 +302,16 @@ public class HomeActivity extends AppCompatActivity implements
 
         @Override
         public void onDrawerOpened(View view) {
-            // Log.v("categoryMapData",""+categoryMapData.size());
-            //Log.v("mPreferenceData categoryData",""+mPreferenceData.getCategoryData());
-            //Log.v("getCategorycacheFlag",""+mPreferenceData.getCategorycacheFlag());
-            //Log.v("homejson",""+homejson);
+
             if (homejson != null) {
                 try {
                     cachflagserver = homejson.getString("navcache");
-                    //  Log.v("cachflagserver", "" + cachflagserver);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            //Log.v("cachflagserver", "" + cachflagserver);
             if (mPreferenceData.getCategoryData().isEmpty()) {
-                //if (categoryMapData.size() == 0) {
                 initCategoryData();
-                // }
 
             } else if (homejson != null) {
                 if (!cachflagserver.equals(mPreferenceData.getCategorycacheFlag())) {
@@ -354,15 +324,6 @@ public class HomeActivity extends AppCompatActivity implements
                 mProgresbar.setVisibility(View.GONE);
                 showCategoryData();
             }
-
-
-            /*else  if(!cachflagserver.equals(mPreferenceData.getCategorycacheFlag())){
-                initCategoryData();
-            }else{
-                showCategoryData();
-                ///displayCategoryData();
-            }*/
-
 
         }
 
@@ -403,9 +364,10 @@ public class HomeActivity extends AppCompatActivity implements
 
 
     private void initCategoryData() {
-        GogglesAsynctask gogglesAsynctask = new GogglesAsynctask(mContext, AppConstants.CODE_FOR_CATEGORY);
 
-        gogglesAsynctask.execute();
+        WebServiceAsync categoryAsync = new WebServiceAsync(HomeActivity.this, HomeActivity.this, AppConstants.CODE_FOR_CATEGORY);
+        categoryAsync.execute();
+
     }
 
 
@@ -438,38 +400,20 @@ public class HomeActivity extends AppCompatActivity implements
         listview_collections.setAdapter(new CollectionImageAdapter(mContext, colectionList));
         mPageindicator.setViewPager(mViewPagerBanner);
         mPageindicator.setFillColor(getResources().getColor(R.color.maincolor));
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < bannerImgList.size() - 1; i++) {
-                    final int value = i;
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mViewPagerBanner.setCurrentItem(value, true);
-                        }
-                    });
-                }
-            }
-        };
-        new Thread(runnable).start();
 
     }
 
-    private void init() {
-        GogglesAsynctask gogglesAsynctask = new GogglesAsynctask(mContext, AppConstants.CODE_FOR_HOME);
-        gogglesAsynctask.execute();
+    /**
+     * Get the home data from webservices
+     */
+    private void getHomeData() {
+        WebServiceAsync webServiceAsync = new WebServiceAsync(HomeActivity.this, HomeActivity.this, AppConstants.CODE_FOR_HOME);
+        webServiceAsync.execute();
     }
 
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        //  outState.putInt(STATE_POSITION, mViewPagerBanner.getCurrentItem());
     }
 
     @Override
@@ -541,33 +485,14 @@ public class HomeActivity extends AppCompatActivity implements
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        //Fragment fragment = null;
 
         if (id == R.id.nav_myorder) {
 
         } else if (id == R.id.nav_my_account) {
 
 
-        }/*else if(id== R.id.nav_logout){
-            mPreferenceData.setLogincheck(false);
-            finish();
-            //startActivity(new Intent(mContext,LoginActivity.class));
-        }*/
-       /* if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-            //mDrawerList.setItemChecked(position, true);
-            //mDrawerList.setSelection(position);
-           // setTitle(mNavigationDrawerItemTitles[position]);
-            //mDrawerLayout.closeDrawer(mDrawerList);
-
-        } else {
-            Log.e("MainActivity", "Error in creating fragment");
-        }*/
-
+        }
         drawer.closeDrawer(GravityCompat.START);
-        //drawer.addDrawerListener(new ActionBarDrawerToggle());
         return true;
     }
 
@@ -644,7 +569,7 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        sInstance.homelt.setVisibility(View.VISIBLE);
+        homelt.setVisibility(View.VISIBLE);
         mViewPagerBanner.setAdapter(new BannerImageAdapter(mContext, bannerImgList, "fromhome"));
         listview_products.setAdapter(new HorizontalListAdapter(mContext, newArrivalDataList));
         listview_collections.setAdapter(new CollectionImageAdapter(mContext, colectionList));
@@ -677,32 +602,29 @@ public class HomeActivity extends AppCompatActivity implements
         }
     }
 
-    public static void updateUi(String result, JSONObject receiveJSon) {
+    public void updateUi(WebData data) {
 
-        if (result.equals(AppConstants.SUCCESSFUL)) {
-            sInstance.nwlt.setVisibility(View.GONE);
-            sInstance.homelt.setVisibility(View.VISIBLE);
-            sInstance.showHomeData();
-
-            sInstance.setCategoryData(receiveJSon);
+        if (data.getResult().equals(AppConstants.SUCCESSFUL)) {
+            nwlt.setVisibility(View.GONE);
+            homelt.setVisibility(View.VISIBLE);
+            showHomeData();
+            setCategoryData(data.getReceiveJson());
 
         } else {
-            sInstance.homelt.setVisibility(View.GONE);
-            sInstance.nwlt.setVisibility(View.VISIBLE);
-            Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
+            homelt.setVisibility(View.GONE);
+            nwlt.setVisibility(View.VISIBLE);
+            Toast.makeText(getApplicationContext(), "" + data.getResult(), Toast.LENGTH_LONG).show();
         }
     }
 
 
-    static HomeActivity sInstance;
-
-    public static void updateCategoryData(String result) {
+    public void updateCategoryData(String result) {
 
         if (result.equals(AppConstants.SUCCESSFUL)) {
-            sInstance.mProgresbar.setVisibility(View.GONE);
-            sInstance.displayCategoryData();
+            mProgresbar.setVisibility(View.GONE);
+            displayCategoryData();
         } else {
-            Toast.makeText(sInstance, "" + result, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "" + result, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -725,7 +647,7 @@ public class HomeActivity extends AppCompatActivity implements
     /**
      * Close the drawer if opened.
      */
-    private void closeDrawer(){
+    private void closeDrawer() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
@@ -736,8 +658,17 @@ public class HomeActivity extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RESULT_LOGIN) {
-                loginLogoutcheck();
-            }
+            loginLogoutcheck();
+        }
 
+    }
+
+    @Override
+    public void onDataReceived(WebData data) {
+        if (data.getCode() == AppConstants.CODE_FOR_HOME) {
+            updateUi(data);
+        } else if (data.getCode() == AppConstants.CODE_FOR_CATEGORY) {
+            updateCategoryData(data.getResult());
+        }
     }
 }

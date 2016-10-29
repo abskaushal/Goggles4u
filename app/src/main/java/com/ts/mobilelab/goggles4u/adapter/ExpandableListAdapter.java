@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -93,13 +94,19 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         }
 
-        if(isExpanded){
-            convertView.setBackgroundResource(R.color.nav_bg_grey_dark);
-        }else{
-            convertView.setBackgroundResource(R.color.nav_bg_grey_light);
-        }
+
         TextView tv = (TextView) convertView.findViewById(R.id.lblListHeader);
         tv.setText(headerTitle.toUpperCase());
+
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.image);
+
+        if(isExpanded){
+            convertView.setBackgroundResource(R.color.nav_bg_grey_dark);
+            imageView.setImageResource(R.drawable.ic_prescription_glass);
+        }else{
+            convertView.setBackgroundResource(R.color.nav_bg_grey_light);
+            imageView.setImageResource(R.drawable.ic_designer_glass);
+        }
 
 
         return convertView;

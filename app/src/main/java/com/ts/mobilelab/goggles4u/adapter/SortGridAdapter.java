@@ -24,6 +24,8 @@ import com.paging.gridview.PagingBaseAdapter;
 import com.ts.mobilelab.goggles4u.ProductDetailsActivity;
 import com.ts.mobilelab.goggles4u.R;
 import com.ts.mobilelab.goggles4u.TryOnActivity;
+import com.ts.mobilelab.goggles4u.apis.IWebService;
+import com.ts.mobilelab.goggles4u.apis.ProductListAsync;
 import com.ts.mobilelab.goggles4u.data.AppConstants;
 import com.ts.mobilelab.goggles4u.data.PreferenceData;
 import com.ts.mobilelab.goggles4u.data.ProductData;
@@ -31,6 +33,7 @@ import com.ts.mobilelab.goggles4u.net.GogglesAsynctask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -48,6 +51,7 @@ public class SortGridAdapter extends PagingBaseAdapter<String> {
     private Context ctx;
     private ArrayList<ProductData> dataArrayList;
     private PreferenceData mPreferenceData;
+    private final int DUMMY = -1;
 
 
     public SortGridAdapter(Context mContext, ArrayList<ProductData> dataList) {
@@ -93,15 +97,15 @@ public class SortGridAdapter extends PagingBaseAdapter<String> {
 
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.product_griditem,parent,false);
+            convertView = inflater.inflate(R.layout.product_grid,parent,false);
             viewHolder = new ViewHolder();
             viewHolder.product_img = (ImageView) convertView.findViewById(R.id.imv_productgrid);
             viewHolder.productId = (TextView) convertView.findViewById(R.id.tv_productid);
             viewHolder.productPrice = (TextView) convertView.findViewById(R.id.tv_productprice);
-            viewHolder.productrating = (RatingBar) convertView.findViewById(R.id.ratingBar_grid);
+            //viewHolder.productrating = (RatingBar) convertView.findViewById(R.id.ratingBar_grid);
             viewHolder.colorlt = (LinearLayout) convertView.findViewById(R.id.linear_colrlt);
-            viewHolder.tryonBtn = (Button) convertView.findViewById(R.id.btn_tryon_grid);
-            viewHolder.selectBtn = (Button) convertView.findViewById(R.id.btn_select_grid);
+            viewHolder.tryonBtn = (TextView) convertView.findViewById(R.id.btn_tryon_grid);
+           // viewHolder.selectBtn = (Button) convertView.findViewById(R.id.btn_select_grid);
             viewHolder.fav_img = (ImageView) convertView.findViewById(R.id.imv_addtofav);
             convertView.setTag(viewHolder);
         }else {
@@ -116,16 +120,18 @@ public class SortGridAdapter extends PagingBaseAdapter<String> {
       convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                ctx.startActivity(new Intent(ctx, ProductDetailsActivity.class).putExtra("pid",dataArrayList.get(position).getProductId()).putExtra("skuid",dataArrayList.get(position).getProductSku()));
                // ctx.startActivity(new Intent(ctx, TryOnActivity.class));
             }
         });
-        viewHolder.selectBtn.setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ctx.startActivity(new Intent(ctx, ProductDetailsActivity.class).putExtra("pid",dataArrayList.get(position).getProductId()).putExtra("skuid",dataArrayList.get(position).getProductSku()));
             }
-        });
+        });*/
 
         viewHolder.fav_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,10 +153,12 @@ public class SortGridAdapter extends PagingBaseAdapter<String> {
 
                     if (productData.isProductMarked() == false) {
                         favjson.put("mark", 1);
-                        GogglesAsynctask asynctask = new GogglesAsynctask(ctx, AppConstants.CODE_FOR_MARKTOFAVRITE);
+                        //GogglesAsynctask asynctask = new GogglesAsynctask(ctx, AppConstants.CODE_FOR_MARKTOFAVRITE);
+                        ProductListAsync asynctask = new ProductListAsync(ctx, (IWebService)ctx,AppConstants.CODE_FOR_MARKTOFAVRITE,DUMMY);
                         asynctask.execute(favjson.toString());
                     } else {
-                        GogglesAsynctask asynctask = new GogglesAsynctask(ctx, AppConstants.CODE_FOR_UNMARKTOFAVRITE);
+                        //GogglesAsynctask asynctask = new GogglesAsynctask(ctx, AppConstants.CODE_FOR_UNMARKTOFAVRITE);
+                        ProductListAsync asynctask = new ProductListAsync(ctx, (IWebService)ctx,AppConstants.CODE_FOR_UNMARKTOFAVRITE,DUMMY);
                         asynctask.execute(favjson.toString());
                     }
                 }catch (JSONException e) {
@@ -208,10 +216,10 @@ public class SortGridAdapter extends PagingBaseAdapter<String> {
 
     static class ViewHolder{
         ImageView product_img,fav_img;
-        TextView productId,productPrice;
+        TextView productId,productPrice,tryonBtn;
         RatingBar productrating;
         LinearLayout colorlt;
-        Button tryonBtn,selectBtn;
+        Button selectBtn;
     }
     private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
 

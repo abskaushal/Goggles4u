@@ -10,6 +10,7 @@ public class WebData {
     private String result;
     private JSONObject sendJson;
     private JSONObject receiveJson;
+    private int code;
 
     public String getResult() {
         return result;
@@ -33,5 +34,13 @@ public class WebData {
 
     public void setReceiveJson(JSONObject receiveJson) {
         this.receiveJson = receiveJson;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

@@ -15,12 +15,10 @@
         android:padding="8dip">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="30dip"
-            android:minWidth="30dip"
+            android:layout_width="@dimen/nav_image_size"
+            android:layout_height="@dimen/nav_image_size"
             android:padding="4dip"
-            android:src="@drawable/ic_my_library_books_24dp" />
+            android:src="@drawable/ic_my_orders" />
 
         <TextView
             android:layout_width="match_parent"
@@ -43,12 +41,10 @@
         android:padding="8dip">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="30dip"
-            android:minWidth="30dip"
+            android:layout_width="@dimen/nav_image_size"
+            android:layout_height="@dimen/nav_image_size"
             android:padding="4dip"
-            android:src="@drawable/ic_fav_24dp" />
+            android:src="@drawable/ic_favourite" />
 
         <TextView
             android:layout_width="match_parent"
@@ -71,10 +67,8 @@
         android:padding="8dip">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="30dip"
-            android:minWidth="30dip"
+            android:layout_width="@dimen/nav_image_size"
+            android:layout_height="@dimen/nav_image_size"
             android:padding="4dip"
             android:src="@drawable/ic_fav_24dp" />
 
@@ -112,12 +106,10 @@
         android:padding="8dip">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="30dip"
-            android:minWidth="30dip"
+            android:layout_width="@dimen/nav_image_size"
+            android:layout_height="@dimen/nav_image_size"
             android:padding="4dip"
-            android:src="@drawable/ic_nav_account_24dp" />
+            android:src="@drawable/ic_my_account" />
 
         <TextView
             android:layout_width="match_parent"
@@ -140,12 +132,10 @@
         android:padding="8dip">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="30dip"
-            android:minWidth="30dip"
+            android:layout_width="@dimen/nav_image_size"
+            android:layout_height="@dimen/nav_image_size"
             android:padding="4dip"
-            android:src="@drawable/ic_live_help_24dp" />
+            android:src="@drawable/ic_help_center" />
 
         <TextView
             android:layout_width="match_parent"
@@ -168,12 +158,10 @@
         android:padding="8dip">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="30dip"
-            android:minWidth="30dip"
+            android:layout_width="@dimen/nav_image_size"
+            android:layout_height="@dimen/nav_image_size"
             android:padding="4dip"
-            android:src="@drawable/ic_nav_settings_24dp" />
+            android:src="@drawable/ic_settings" />
 
         <TextView
             android:layout_width="match_parent"

@@ -125,14 +125,14 @@ public class NetAsyncTask extends AsyncTask<String,Void,String> {
             e.printStackTrace();
         }
         if (mCheckcode == AppConstants.CODE_FOR_PRODUCTLISTING) {
-            ProductListingActivity.updateUi(result, receiveJSon);
+           // ProductListingActivity.updateUi(result, receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_SORTOPTION_SUBMIT){
            // ProductListingNew.updateUi(result, receiveJSon);
            // ProductListingNew.updateSortData(result, receiveJSon,pageFlag);
-            ProductListingActivity.updateSortData(result,receiveJSon);
+           // ProductListingActivity.updateSortData(result,receiveJSon);
         }else if(mCheckcode == AppConstants.CODE_FOR_FILTERDATA_SUBMIT){
             ////ProductListingNew.updateUi(result, receiveJSon);
-            ProductListingActivity.updateFilterData(result, receiveJSon,pageFlag);
+          //  ProductListingActivity.updateFilterData(result, receiveJSon,pageFlag);
         }
     }
 

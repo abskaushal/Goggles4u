@@ -124,6 +124,7 @@ public class FilterActivity extends AppCompatActivity implements ICallback, IFil
     public void onFilterDataReceived(String result, JSONObject receiveJSon) {
         if (result.equals(AppConstants.SUCCESSFUL)) {
             try {
+
                 JSONArray jsonArray = receiveJSon.getJSONArray(AppConstants.FILTER_ATTRIBUTES);
                 mFilterItems = new ArrayList<>(jsonArray.length());
                 FilterItem filterItem;

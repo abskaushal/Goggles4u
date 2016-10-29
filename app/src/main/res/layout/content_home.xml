@@ -6,6 +6,7 @@
     android:background="@color/home_bg_grey"
     android:orientation="vertical"
     tools:context="com.ts.mobilelab.goggles4u.HomeActivity"
+    android:visibility="gone"
     tools:showIn="@layout/app_bar_home">
 
     <ListView

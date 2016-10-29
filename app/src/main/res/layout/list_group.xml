@@ -11,11 +11,10 @@
     android:padding="8dip">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="30dip"
-        android:minWidth="30dip"
-        android:padding="4dip"
+        android:id="@+id/image"
+        android:layout_width="@dimen/nav_image_size"
+        android:layout_height="@dimen/nav_image_size"
+        android:padding="4dp"
         android:src="@drawable/ic_home_24dp" />
 
     <TextView
